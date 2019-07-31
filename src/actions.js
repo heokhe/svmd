@@ -9,3 +9,13 @@ export function rippleAction(node, { unbounded = false } = {}) {
     }
   };
 }
+
+export function component(node, mdc) {
+  // eslint-disable-next-line new-cap
+  const instance = new mdc(node);
+  return {
+    destroy() {
+      instance.destroy();
+    }
+  };
+}
