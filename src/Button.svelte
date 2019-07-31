@@ -1,24 +1,15 @@
 <script>
 import '@material/button/mdc-button.scss';
-import { onMount, onDestroy } from 'svelte';
-import { MDCRipple } from '@material/ripple';
+import { rippleAction as ripple } from './actions';
 
 export let dense = false,
   raised = false,
   outlined = false,
   unelevated = false;
-
-let button, ripple;
-onMount(() => {
-  ripple = new MDCRipple(button);
-})
-onDestroy(() => {
-  if (ripple) ripple.destroy()
-})
 </script>
 
 <button class="mdc-button"
-  bind:this={button}
+  use:ripple
   class:mdc-button--dense={dense}
   class:mdc-button--outlined={outlined}
   class:mdc-button--unelevated={unelevated}
