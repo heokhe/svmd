@@ -1,21 +1,32 @@
 import { MDCRipple } from '@material/ripple';
 
-export function rippleAction(node, { unbounded = false } = {}) {
-  const r = new MDCRipple(node);
-  r.unbounded = !!unbounded;
-  return {
-    destroy() {
-      r.destroy();
-    }
+const createHookCaller = (...args) => hook => (typeof hook === 'function' ? hook(...args) : undefined);
+
+export function createComponentAction(constructor, {
+  initialize, beforeDestroy, destroy, update
+} = {}) {
+  return (node, params) => {
+    // eslint-disable-next-line new-cap
+    const instance = new constructor(node),
+      fire = createHookCaller(node, instance, params);
+    fire(initialize);
+    return {
+      destroy() {
+        fire(beforeDestroy);
+        instance.destroy();
+        fire(destroy);
+      },
+      update: parameter => {
+        createHookCaller(node, instance, parameter)(update);
+      }
+    };
   };
 }
 
-export function component(node, mdc) {
-  // eslint-disable-next-line new-cap
-  const instance = new mdc(node);
-  return {
-    destroy() {
-      instance.destroy();
-    }
-  };
-}
+export const ripple = createComponentAction(MDCRipple, {
+  initialize(_, rpl, { unbounded = false } = {}) {
+    rpl.unbounded = !!unbounded;
+  }
+});
+
+export const component = constructor => createComponentAction(constructor, {});
