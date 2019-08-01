@@ -14,12 +14,12 @@ export let fixed = false,
   alwaysClosed = false,
   title = '';
 
+const action = component(MDCTopAppBar)
 const dispatch = createEventDispatcher()
 </script>
 
-<header
+<header use:action
   class="mdc-top-app-bar"
-  use:component={MDCTopAppBar}
   class:mdc-top-app-bar--fixed={fixed}
   class:mdc-top-app-bar--dense={dense}
   class:mdc-top-app-bar--prominent={prominent}
