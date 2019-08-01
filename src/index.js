@@ -1,8 +1,5 @@
-import Button from './Button.svelte';
-import TopAppBar from './TopAppBar.svelte';
-import Icon from './Icon.svelte';
-import IconButton from './IconButton.svelte';
-
-export {
-  Button, TopAppBar, Icon, IconButton
-};
+export { default as Button } from './Button.svelte';
+export { default as TopAppBar } from './TopAppBar.svelte';
+export { default as Icon } from './Icon.svelte';
+export { default as IconButton } from './IconButton.svelte';
+export { default as Drawer } from './Drawer.svelte';
