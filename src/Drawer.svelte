@@ -1,16 +1,13 @@
 <script>
 import '@material/drawer/mdc-drawer.scss';
-import { onMount, onDestroy } from 'svelte';
 import { createComponentAction } from './actions';
+import { createClassname } from './helpers';
 import { MDCDrawer } from '@material/drawer';
-
 export let dismissible = false,
   modal = false,
   open = false;
-
 const action = createComponentAction(MDCDrawer, {
   initialize(_, drawer) {
-    console.log(drawer)
     drawer.wrapFocus = true
     if (!drawer.focusTrap_) {
       drawer.focusTrap_ = drawer.focusTrapFactory_()
@@ -21,12 +18,10 @@ const action = createComponentAction(MDCDrawer, {
     if (isOpen !== drawer.open) drawer.open = isOpen
   }
 })
+$: className = createClassname('mdc-drawer', { modal, dismissible })
 </script>
 
-<aside use:action={open}
-  class="mdc-drawer"
-  class:mdc-drawer--dismissible={dismissible}
-  class:mdc-drawer--modal={modal}>
+<aside use:action={open} class={className}>
   <div class="mdc-drawer__header">
     <slot name="header"></slot>
   </div>
