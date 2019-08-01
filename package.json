@@ -36,6 +36,10 @@
     "@material/icon-button": "^3.1.0",
     "@material/list": "^3.1.0",
     "@material/ripple": "^3.1.0",
+    "@material/tab": "^3.1.0",
+    "@material/tab-bar": "^3.1.0",
+    "@material/tab-indicator": "^3.1.0",
+    "@material/tab-scroller": "^3.1.0",
     "@material/top-app-bar": "^3.1.0"
   },
   "repository": {
