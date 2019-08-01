@@ -13,7 +13,7 @@ const isInProduction = !process.env.ROLLUP_WATCH;
 export default {
   input: isInProduction ? 'src/index.js' : 'examples/main.js',
   output: !isInProduction ? {
-    sourcemap: false,
+    sourcemap: true,
     format: 'iife',
     name: 'app',
     file: 'examples/bundle.js'
