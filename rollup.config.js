@@ -32,7 +32,8 @@ export default {
           includePaths: [resolve('node_modules')]
         }]
       ],
-      extract: 'dist/main.css'
+      extract: 'dist/main.css',
+      minimize: isInProduction
     }),
     nodeResolve({
       browser: true
