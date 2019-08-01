@@ -28,9 +28,11 @@ const dispatch = createEventDispatcher()
   <div class="mdc-top-app-bar__row">
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
       {#if !noNavIcon}
-        <IconButton class="mdc-top-app-bar__navigation-icon" disabled on:click={() => dispatch('nav-icon-click')}>
-          <Icon>menu</Icon>
-        </IconButton>
+        <div class="mdc-top-app-bar__navigation-icon">
+          <IconButton class="mdc-top-app-bar__navigation-icon" disabled on:click={() => dispatch('nav-icon-click')}>
+            <Icon>menu</Icon>
+          </IconButton>
+        </div>
       {/if}
       <span class="mdc-top-app-bar__title">{title}</span>
     </section>
