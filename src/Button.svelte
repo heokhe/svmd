@@ -8,7 +8,7 @@ export let dense = false,
   outlined = false,
   unelevated = false;
 $: props = omit($$props, 'dense', 'raised', 'outlined', 'unelevated');
-$: className = createClassname('mdc-button', { dense, outlined, unelevated, raised })
+$: className = createClassname('button', { dense, outlined, unelevated, raised })
 </script>
 
 <button {...props} use:ripple class={className} on:click on:keydown on:keypress on:keyup on:mouseover>

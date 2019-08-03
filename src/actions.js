@@ -1,32 +1,46 @@
 import { MDCRipple } from '@material/ripple';
+import { createOptionalCaller } from './helpers';
 
-const createHookCaller = (...args) => hook => (typeof hook === 'function' ? hook(...args) : undefined);
-
-export function createComponentAction(constructor, {
+/**
+ * Creates a Svelte action to wrap MDC components.
+ * @example
+ * const action = wrap(MDCTopAppBar, {
+ *   // all methods have this signature
+ *   initialize(element, component, param) {
+ *     console.log('top app bar is initialized')
+ *   }
+ * })
+ * <header use:action>...</header>
+ */
+export function wrap(constructor, {
   initialize, beforeDestroy, destroy, update
 } = {}) {
-  return (node, params) => {
+  return (element, param) => {
     // eslint-disable-next-line new-cap
-    const instance = new constructor(node),
-      fire = createHookCaller(node, instance, params);
+    const component = new constructor(element),
+      fire = createOptionalCaller(element, component, param);
     fire(initialize);
     return {
       destroy() {
         fire(beforeDestroy);
-        instance.destroy();
+        component.destroy();
         fire(destroy);
       },
-      update: parameter => {
-        createHookCaller(node, instance, parameter)(update);
+      // eslint-disable-next-line no-shadow
+      update: param => {
+        createOptionalCaller(element, component, param)(update);
       }
     };
   };
 }
 
-export const ripple = createComponentAction(MDCRipple, {
+/**
+ * An action to wrap MDCRipple component.
+ * @example
+ * <button use:ripple>Click me to see the ripple effect!</button>
+ */
+export const ripple = wrap(MDCRipple, {
   initialize(_, rpl, { unbounded = false } = {}) {
     rpl.unbounded = !!unbounded;
   }
 });
-
-export const component = constructor => createComponentAction(constructor, {});

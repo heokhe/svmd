@@ -1,12 +1,12 @@
 <script>
 import '@material/drawer/mdc-drawer.scss';
-import { createComponentAction } from './actions';
+import { wrap } from './actions';
 import { createClassname } from './helpers';
 import { MDCDrawer } from '@material/drawer';
 export let dismissible = false,
   modal = false,
   open = false;
-const action = createComponentAction(MDCDrawer, {
+const mdc = wrap(MDCDrawer, {
   initialize(_, drawer) {
     drawer.wrapFocus = true
     if (!drawer.focusTrap_) {
@@ -18,10 +18,10 @@ const action = createComponentAction(MDCDrawer, {
     if (isOpen !== drawer.open) drawer.open = isOpen
   }
 })
-$: className = createClassname('mdc-drawer', { modal, dismissible })
+$: className = createClassname('drawer', { modal, dismissible })
 </script>
 
-<aside use:action={open} class={className}>
+<aside use:mdc={open} class={className}>
   <div class="mdc-drawer__header">
     <slot name="header"></slot>
   </div>

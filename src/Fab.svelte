@@ -9,7 +9,7 @@ export let icon = '',
   fixed = false,
   iconTrailing = false,
   mini = false;
-$: className = createClassname('mdc-fab', { extended, mini, exited, fixed })
+$: className = createClassname('fab', { extended, mini, exited, fixed })
 </script>
 
 <button use:ripple class={className} on:click>
@@ -31,6 +31,7 @@ $: className = createClassname('mdc-fab', { extended, mini, exited, fixed })
   position: fixed;
   bottom: 1rem;
   right: 1rem;
+  z-index: 5;
 }
 @media only screen and (min-width: 1024px) {
   :global(.mdc-fab.mdc-fab--fixed) {

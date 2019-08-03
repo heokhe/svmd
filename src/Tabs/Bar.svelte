@@ -1,12 +1,14 @@
 <script>
 import '@material/tab-bar/mdc-tab-bar.scss';
 import { MDCTabBar } from '@material/tab-bar';
-import { createComponentAction } from '../actions';
+import { wrap } from '../actions';
 import { createClassname } from '../helpers';
+import { setContext } from 'svelte';
 import Scroller from './Scroller.svelte';
 
-export let active = 0;
-const action = createComponentAction(MDCTabBar, {
+export let active = 0,
+  stacked = false;
+const mdc = wrap(MDCTabBar, {
   initialize(_, tabBar) {
     tabBar.activateTab(active)
     tabBar.listen('MDCTabBar:activated', ev => {
@@ -23,9 +25,10 @@ const action = createComponentAction(MDCTabBar, {
     }
   }
 });
+$: setContext('stacked', stacked)
 </script>
 
-<div class="mdc-tab-bar" role="tablist" use:action={active}>
+<div class="mdc-tab-bar" role="tablist" use:mdc={active}>
   <Scroller>
     <slot></slot>
   </Scroller>
