@@ -33,13 +33,17 @@
     "@material/button": "^3.1.0",
     "@material/drawer": "^3.1.0",
     "@material/fab": "^3.1.0",
+    "@material/form-field": "^3.1.0",
     "@material/icon-button": "^3.1.0",
     "@material/list": "^3.1.0",
     "@material/ripple": "^3.1.0",
+    "@material/slider": "^3.1.0",
+    "@material/switch": "^3.1.0",
     "@material/tab": "^3.1.0",
     "@material/tab-bar": "^3.1.0",
     "@material/tab-indicator": "^3.1.0",
     "@material/tab-scroller": "^3.1.0",
+    "@material/textfield": "^3.1.0",
     "@material/top-app-bar": "^3.1.0"
   },
   "repository": {
