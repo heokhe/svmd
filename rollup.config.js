@@ -36,11 +36,13 @@ export default {
       minimize: isInProduction
     }),
     nodeResolve({
-      browser: true
-      // dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
+      browser: true,
+      dedupe: ['svelte', 'svelte/*']
     }),
     commonjs(),
-    !isInProduction && livereload(),
+    !isInProduction && livereload({
+      extraExts: ['scss']
+    }),
     isInProduction && terser()
   ],
   watch: {
