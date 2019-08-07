@@ -8,11 +8,18 @@ export let dismissible = false,
   open = false;
 const mdc = wrap(MDCDrawer, {
   initialize(_, drawer) {
-    drawer.wrapFocus = true
-    if (!drawer.focusTrap_) {
-      drawer.focusTrap_ = drawer.focusTrapFactory_()
-    }
-    drawer.open = !!open;
+    // fixes scrim_ === null
+    setTimeout(() => {
+      drawer.wrapFocus = true
+      if (!drawer.focusTrap_) {
+        drawer.focusTrap_ = drawer.focusTrapFactory_()
+      }
+      if (!drawer.scrim_) drawer.initialSyncWithDOM()
+      drawer.open = !!open;
+      drawer.listen('MDCDrawer:closed', () => {
+        open = false
+      })
+    }, 0);
   },
   update(_, drawer, isOpen) {
     if (isOpen !== drawer.open) drawer.open = isOpen
