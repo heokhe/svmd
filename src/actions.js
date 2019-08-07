@@ -13,9 +13,9 @@ import { createOptionalCaller } from './helpers';
  * <header use:action>...</header>
  */
 export function wrap(constructor, {
-  initialize, beforeDestroy, destroy, update
+  initialize, beforeDestroy, destroy, update, paramDefaultValue = {}
 } = {}) {
-  return (element, param = {}) => {
+  return (element, param = paramDefaultValue) => {
     // eslint-disable-next-line new-cap
     const component = new constructor(element),
       fire = createOptionalCaller(component, param);
@@ -40,7 +40,8 @@ export function wrap(constructor, {
  * <button use:ripple>Click me to see the ripple effect!</button>
  */
 export const ripple = wrap(MDCRipple, {
-  initialize(rpl, { unbounded = false }) {
+  paramDefaultValue: false,
+  initialize(rpl, unbounded) {
     rpl.unbounded = !!unbounded;
   }
 });
