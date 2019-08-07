@@ -1,8 +1,10 @@
 export { default as Button } from './Button.svelte';
-export { default as TopAppBar } from './TopAppBar.svelte';
+export { default as TextField, default as Input } from './TextField.svelte';
+export { default as TopAppBar } from './TopAppBar/TopAppBar.svelte';
 export { default as Icon } from './Icon.svelte';
 export { default as IconButton } from './IconButton.svelte';
 export { default as Drawer } from './Drawer.svelte';
 export { default as Fab } from './Fab.svelte';
 export { default as Slider } from './Slider.svelte';
+export { default as Switch } from './Switch.svelte';
 export * from './Tabs';

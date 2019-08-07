@@ -1,10 +1,10 @@
 <script>
-import '@material/top-app-bar/mdc-top-app-bar.scss';
-import IconButton from './IconButton.svelte';
-import Icon from './Icon.svelte';
+import './styles.scss'
+import IconButton from '../IconButton.svelte';
+import Icon from '../Icon.svelte';
 import { MDCTopAppBar } from '@material/top-app-bar';
-import { wrap } from './actions';
-import { createClassname } from './helpers';
+import { wrap } from '../actions';
+import { createClassname } from '../helpers';
 import { createEventDispatcher } from 'svelte';
 export let fixed = false,
   noNavIcon = false,
@@ -36,5 +36,8 @@ $: className = createClassname('top-app-bar', {
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
       <slot></slot>
     </section>
+  </div>
+  <div class="mdc-top-app-bar__row mdc-top-app-bar__row--tabs">
+    <slot name="tabs"></slot> 
   </div>
 </header>

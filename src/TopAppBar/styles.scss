@@ -1,0 +1,28 @@
+@import '@material/top-app-bar/mdc-top-app-bar';
+@import '@material/tab-indicator/mixins';
+@import '@material/tab/mixins';
+
+.mdc-top-app-bar > .mdc-top-app-bar__row.mdc-top-app-bar__row--tabs {
+  &:empty {
+    display: none;
+  }
+  height: 48px;
+  padding: 0 12px;
+  > div {
+    all: inherit;
+    height: unset;
+    padding: 0;
+    .mdc-tab-indicator {
+      @include mdc-tab-indicator-underline-color(white)
+    }
+    .mdc-tab {
+      @include mdc-tab-text-label-color(rgba(#fff, .54));
+      @include mdc-tab-icon-color(rgba(#fff, .54));
+      @include mdc-tab-states-color(#fff);
+      &.mdc-tab--active {
+        @include mdc-tab-text-label-color(#fff);
+        @include mdc-tab-icon-color(#fff);
+      }
+    }
+  }
+}
