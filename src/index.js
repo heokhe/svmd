@@ -8,3 +8,4 @@ export { default as Fab } from './Fab.svelte';
 export { default as Slider } from './Slider.svelte';
 export { default as Switch } from './Switch.svelte';
 export * from './Tabs';
+export * from './List';
