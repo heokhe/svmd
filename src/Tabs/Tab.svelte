@@ -9,8 +9,11 @@ import Indicator from './Indicator.svelte';
 
 export let icon = '';
 const mdc = wrap(MDCTab);
-$: stacked = getContext('stacked')
-$: className = createClassname('tab', { stacked });
+$: tabBarData = getContext('tab-bar-data')
+$: className = createClassname('tab', {
+  stacked: $tabBarData.stacked,
+  minWidth: $tabBarData.narrow
+});
 </script>
 
 <button use:mdc class={className} role="tab" aria-selected="false" tabindex="-1">
@@ -21,7 +24,12 @@ $: className = createClassname('tab', { stacked });
       </span>
     {/if}
     <span class="mdc-tab__text-label"><slot></slot></span>
+    {#if $tabBarData.spanIndicatorToContent}
+      <Indicator />
+    {/if}
   </span>
-  <Indicator />
+  {#if !$tabBarData.spanIndicatorToContent}
+    <Indicator />
+  {/if}
   <span class="mdc-tab__ripple"></span>
 </button>
