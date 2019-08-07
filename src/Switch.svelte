@@ -6,13 +6,13 @@
 
   export let checked = false;
   const mdc = wrap(MDCSwitch, {
-    initialize(_, mdcSwitch) {
+    initialize(mdcSwitch) {
       mdcSwitch.checked = checked;
       mdcSwitch.listen('change', () => {
         checked = mdcSwitch.checked;
       })
     },
-    update(_, mdcSwitch, checked) {
+    update(mdcSwitch, checked) {
       mdcSwitch.checked = checked;
     }
   })

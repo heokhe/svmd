@@ -16,13 +16,13 @@ const tabBarData = writable({ stacked, spanIndicatorToContent, narrow });
 setContext('tab-bar-data', tabBarData)
 
 const mdc = wrap(MDCTabBar, {
-  initialize(_, tabBar) {
+  initialize(tabBar) {
     tabBar.activateTab(active)
     tabBar.listen('MDCTabBar:activated', ev => {
       active = ev.detail.index
     })
   },
-  update(_, tabBar, params) {
+  update(tabBar, params) {
     const { active: n, ...newData } = params;
     tabBarData.set(newData)
     const list = tabBar.tabList_;

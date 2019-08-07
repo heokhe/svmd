@@ -7,7 +7,7 @@ export let dismissible = false,
   modal = false,
   open = false;
 const mdc = wrap(MDCDrawer, {
-  initialize(_, drawer) {
+  initialize(drawer) {
     // fixes scrim_ === null
     setTimeout(() => {
       drawer.wrapFocus = true
@@ -21,7 +21,7 @@ const mdc = wrap(MDCDrawer, {
       })
     }, 0);
   },
-  update(_, drawer, isOpen) {
+  update(drawer, isOpen) {
     if (isOpen !== drawer.open) drawer.open = isOpen
   }
 })

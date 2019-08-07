@@ -13,12 +13,12 @@
     step = 0;
 
   const mdc = wrap(MDCSlider, {
-    initialize(_, slider) {
+    initialize(slider) {
       slider.listen('MDCSlider:input', () => {
         value = slider.value;
       })
     },
-    update(_, slider, { value: newValue, disabled }) {
+    update(slider, { value: newValue, disabled }) {
       slider.value = newValue;
       slider.disabled = disabled;
     }

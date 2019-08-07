@@ -9,7 +9,11 @@ const camelToKebab = str => str.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`
 
 /**
  * @example
- * createClassname('button', { raised: true, displayMarkers: true, outlined: false });
+ * createClassname('button', {
+ *   raised: true,
+ *   displayMarkers: true,
+ *   outlined: false
+ * });
  * // 'mdc-button mdc-button--raised mdc-button--display-markers'
  */
 export const createClassname = (base, modifiers = {}) => [
@@ -23,6 +27,7 @@ export const createClassname = (base, modifiers = {}) => [
  * @example
  * const oneTwoThree = createOptionalCaller(1, 2, 3)
  * oneTwoThree(console.log) // console.log(1, 2, 3)
+ * oneTwoThree(Array) // [1, 2, 3]
  * oneTwoThree(aFunctionThatDoesNotExist) // returns undefined
  */
 export const createOptionalCaller = (...args) => f => (typeof f === 'function' ? f(...args) : undefined);

@@ -6,7 +6,7 @@ import { createOptionalCaller } from './helpers';
  * @example
  * const action = wrap(MDCTopAppBar, {
  *   // all methods have this signature
- *   initialize(element, component, param) {
+ *   initialize(component, param) {
  *     console.log('top app bar is initialized')
  *   }
  * })
@@ -15,10 +15,10 @@ import { createOptionalCaller } from './helpers';
 export function wrap(constructor, {
   initialize, beforeDestroy, destroy, update
 } = {}) {
-  return (element, param) => {
+  return (element, param = {}) => {
     // eslint-disable-next-line new-cap
     const component = new constructor(element),
-      fire = createOptionalCaller(element, component, param);
+      fire = createOptionalCaller(component, param);
     fire(initialize);
     return {
       destroy() {
@@ -28,7 +28,7 @@ export function wrap(constructor, {
       },
       // eslint-disable-next-line no-shadow
       update: param => {
-        createOptionalCaller(element, component, param)(update);
+        createOptionalCaller(component, param)(update);
       }
     };
   };
@@ -40,7 +40,7 @@ export function wrap(constructor, {
  * <button use:ripple>Click me to see the ripple effect!</button>
  */
 export const ripple = wrap(MDCRipple, {
-  initialize(_, rpl, { unbounded = false } = {}) {
+  initialize(rpl, { unbounded = false }) {
     rpl.unbounded = !!unbounded;
   }
 });
