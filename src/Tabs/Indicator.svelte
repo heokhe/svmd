@@ -1,5 +1,4 @@
 <script>
-import '@material/tab-indicator/mdc-tab-indicator.scss';
 import { MDCTabIndicator } from '@material/tab-indicator';
 import { wrap } from '../actions';
 import { createClassname } from '../helpers';
@@ -15,9 +14,7 @@ $: {
   }
 }
 $: className = createClassname('tab-indicator', { fade });
-$: contentClassname = createClassname('tab-indicator__content', {
-  [type === 'icon' ? 'icon' : 'underline']: true
-})
+$: contentClassname = createClassname('tab-indicator__content', { [type]: true })
 </script>
 
 <span use:mdc class={className}>

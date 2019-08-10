@@ -1,5 +1,4 @@
 <script>
-import '@material/tab-scroller/mdc-tab-scroller.scss';
 import { MDCTabScroller } from '@material/tab-scroller';
 import { wrap } from '../actions';
 const mdc = wrap(MDCTabScroller)

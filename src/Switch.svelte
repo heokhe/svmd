@@ -1,5 +1,4 @@
 <script>
-  import '@material/switch/mdc-switch.scss';
   import { wrap } from './actions';
   import { createClassname } from './helpers';
   import { MDCSwitch } from '@material/switch';

@@ -1,5 +1,4 @@
 <script>
-import './styles.scss'
 import IconButton from '../IconButton.svelte';
 import Icon from '../Icon.svelte';
 import { MDCTopAppBar } from '@material/top-app-bar';

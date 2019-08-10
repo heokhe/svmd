@@ -1,5 +1,4 @@
 <script>
-  import '@material/list/mdc-list.scss';
   import { MDCList } from '@material/list';
   import { wrap } from '../actions';
   import { createClassname } from '../helpers';

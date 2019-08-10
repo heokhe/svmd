@@ -1,5 +1,4 @@
 <script>
-import '@material/tab-bar/mdc-tab-bar.scss';
 import { MDCTabBar } from '@material/tab-bar';
 import { wrap } from '../actions';
 import { createClassname } from '../helpers';

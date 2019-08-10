@@ -1,5 +1,4 @@
 <script>
-import '@material/icon-button/mdc-icon-button.scss';
 import { ripple } from './actions';
 </script>
 

@@ -1,5 +1,4 @@
 <script>
-  import '@material/textfield/mdc-text-field.scss';
   import { wrap } from './actions';
   import { createClassname } from './helpers';
   import { MDCTextField } from '@material/textfield';

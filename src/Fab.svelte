@@ -1,5 +1,4 @@
 <script>
-import '@material/fab/mdc-fab.scss';
 import { ripple } from './actions';
 import { createClassname } from './helpers';
 import Icon from './Icon.svelte';

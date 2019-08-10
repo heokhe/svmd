@@ -1,5 +1,4 @@
 <script>
-import '@material/drawer/mdc-drawer.scss';
 import { wrap } from './actions';
 import { createClassname } from './helpers';
 import { MDCDrawer } from '@material/drawer';

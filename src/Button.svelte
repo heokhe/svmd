@@ -1,5 +1,4 @@
 <script>
-import '@material/button/mdc-button.scss';
 import { ripple } from './actions';
 import { omit, createClassname } from './helpers';
 

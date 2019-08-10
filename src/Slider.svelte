@@ -1,5 +1,4 @@
 <script>
-  import '@material/slider/mdc-slider.scss';
   import { wrap } from './actions';
   import { createClassname } from './helpers';
   import { MDCSlider } from '@material/slider';

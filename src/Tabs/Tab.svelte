@@ -1,5 +1,4 @@
 <script>
-import '@material/tab/mdc-tab.scss';
 import { MDCTab } from '@material/tab';
 import { wrap } from '../actions';
 import { createClassname } from '../helpers';
@@ -8,8 +7,8 @@ import Icon from '../Icon.svelte';
 import Indicator from './Indicator.svelte';
 
 export let icon = '';
+const tabBarData = getContext('tab-bar-data')
 const mdc = wrap(MDCTab);
-$: tabBarData = getContext('tab-bar-data')
 $: className = createClassname('tab', {
   stacked: $tabBarData.stacked,
   minWidth: $tabBarData.narrow
