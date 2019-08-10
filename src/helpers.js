@@ -5,22 +5,33 @@ export const omit = (obj, ...keys) => Object.keys(obj)
   }))
   .reduce((a, b) => ({ ...a, ...b }), {});
 
-const camelToKebab = str => str.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
+/** @param {string} str */
+const camelToKebab = str => str.replace(
+  /([A-Z])/g,
+  letter => `-${letter.toLowerCase()}`
+);
 
 /**
  * @example
- * createClassname('button', {
+ * createClassname('test', {
  *   raised: true,
  *   displayMarkers: true,
+ *   align: 'left',
  *   outlined: false
  * });
- * // 'mdc-button mdc-button--raised mdc-button--display-markers'
+ * // 'mdc-test mdc-test--raised mdc-test--display-markers mdc-test--align-left'
  */
 export const createClassname = (base, modifiers = {}) => [
   `mdc-${base}`,
   ...Object.entries(modifiers)
     .filter(([, v]) => !!v)
-    .map(([k]) => `mdc-${base}--${camelToKebab(k)}`)
+    .map(([k, v]) => {
+      let string = `mdc-${base}--${camelToKebab(k)}`;
+      if (['number', 'string'].includes(typeof v)) {
+        string += `-${v}`;
+      }
+      return string;
+    })
 ].join(' ');
 
 /**
