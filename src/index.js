@@ -7,5 +7,7 @@ export { default as Drawer } from './Drawer.svelte';
 export { default as Fab } from './Fab.svelte';
 export { default as Slider } from './Slider.svelte';
 export { default as Switch } from './Switch.svelte';
+export { default as Grid, default as LayoutGrid } from './Grid.svelte';
+export { default as Cell, default as LayoutCell } from './Cell.svelte';
 export * from './Tabs';
 export * from './List';
