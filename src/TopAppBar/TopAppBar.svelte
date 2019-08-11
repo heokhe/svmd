@@ -12,8 +12,9 @@ export let fixed = false,
   short = false,
   alwaysClosed = false,
   title = '';
-const mdc = wrap(MDCTopAppBar)
-const dispatch = createEventDispatcher()
+const mdc = wrap(MDCTopAppBar),
+  dispatch = createEventDispatcher(),
+  onNavIconClick = e => dispatch('nav-icon-click', e);
 $: className = createClassname('top-app-bar', {
   fixed, dense, prominent, short,
   'short-collapsed': alwaysClosed
@@ -25,7 +26,7 @@ $: className = createClassname('top-app-bar', {
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
       {#if !noNavIcon}
         <div class="mdc-top-app-bar__navigation-icon">
-          <IconButton class="mdc-top-app-bar__navigation-icon" disabled on:click={() => dispatch('nav-icon-click')}>
+          <IconButton class="mdc-top-app-bar__navigation-icon" on:click={onNavIconClick}>
             <Icon>menu</Icon>
           </IconButton>
         </div>
