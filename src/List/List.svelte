@@ -6,7 +6,13 @@
   export let dense = false,
     twoLine = false;
 
-  const mdc = wrap(MDCList)
+  const mdc = wrap(MDCList, {
+    initialize(list) {
+      list.wrapFocus = true;
+      list.singleSelection = true;
+      list.selectedIndex = 0;
+    }
+  })
 
   $: className = createClassname('list', { dense, twoLine });
 </script>
