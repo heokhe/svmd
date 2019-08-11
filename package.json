@@ -5,10 +5,10 @@
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rollup -c",
-    "build:dev": "rollup -cw",
-    "serve": "sirv -s",
-    "serve:dev": "sirv -sD",
+    "build": "rollup -c config/prod.js && rm dist/.csstemp",
+    "build:dev": "rollup -wc config/dev.js",
+    "serve": "sirv -p 8080 -H 0.0.0.0 -s",
+    "serve:dev": "npm run serve -- -D",
     "start": "run-p serve:dev build:dev",
     "prepublishOnly": "npm run build"
   },
