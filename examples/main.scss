@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+}
+
+@import '@material/theme/color-palette';
+
+$mdc-theme-primary: $material-color-indigo-500;
+$mdc-theme-secondary: $material-color-pink-a200;
+
+@import '../src/sass/svmd';
