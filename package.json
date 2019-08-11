@@ -10,12 +10,14 @@
     "serve": "sirv -p 8080 -H 0.0.0.0 -s",
     "serve:dev": "npm run serve -- -D",
     "start": "run-p serve:dev build:dev",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "docs": "node docs/generator/index.js"
   },
   "devDependencies": {
     "@hkh12/eslint-config": "^1.0.1",
     "eslint": "^6.1.0",
     "eslint-plugin-svelte3": "^2.7.3",
+    "globby": "^10.0.1",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
     "postcss-import": "^12.0.1",
@@ -27,7 +29,8 @@
     "rollup-plugin-svelte": "^5.0.0",
     "rollup-plugin-terser": "^5.1.1",
     "sirv-cli": "^0.4.4",
-    "svelte": "^3.6.10"
+    "svelte": "^3.6.10",
+    "sveltedoc-parser": "^2.1.0"
   },
   "dependencies": {
     "@material/button": "^3.1.0",
