@@ -22,7 +22,7 @@ const startTime = Date.now();
       contents = (await readFile(file)).toString();
 
     /** @type {import('sveltedoc-parser/typings').SvelteComponentDoc} */
-    const json = await parse({
+    const component = await parse({
       fileContent: contents,
       version: 3
     });
@@ -30,7 +30,7 @@ const startTime = Date.now();
     let md = `# ${componentName}\n`;
     md += `## Importing\n\`\`\`js\nimport { ${componentName} } from 'svmd';\n\`\`\`\n`;
 
-    const props = json.data.filter(d => d.visibility === 'public');
+    const props = component.data.filter(d => d.visibility === 'public');
     md += '## Props\n';
     if (props.length) {
       md += '| Name | Description | Type | Default value\n';
