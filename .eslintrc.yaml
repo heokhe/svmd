@@ -1,5 +1,5 @@
 root: true
-extends: @hkh12
+extends: "@hkh12"
 plugins:
   - svelte3
 env:
