@@ -4,7 +4,7 @@ import { wrap } from '../actions';
 import { createClassname } from '../helpers';
 import { setContext } from 'svelte';
 import { writable } from 'svelte/store';
-import Scroller from './Scroller.svelte';
+import Scroller from './TabScroller.svelte';
 
 export let active = 0,
   stacked = false,

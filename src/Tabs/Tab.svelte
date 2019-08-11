@@ -4,7 +4,7 @@ import { wrap } from '../actions';
 import { createClassname } from '../helpers';
 import { getContext } from 'svelte';
 import Icon from '../Icon.svelte';
-import Indicator from './Indicator.svelte';
+import Indicator from './TabIndicator.svelte';
 
 export let icon = '';
 const tabBarData = getContext('tab-bar-data')
