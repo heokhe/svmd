@@ -15,7 +15,12 @@
     initialize(slider) {
       slider.listen('MDCSlider:input', () => {
         value = slider.value;
-      })
+      });
+      for (const e of ['closed', 'opened']) {
+        window.addEventListener(`MDCDrawer:${e}`, () => {
+          slider.layout();
+        })
+      }
     },
     update(slider, { value: newValue, disabled }) {
       slider.value = newValue;
