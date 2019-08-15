@@ -33,7 +33,7 @@ Use the following approach:
 $mdc-theme-primary: red;
 $mdc-theme-secondary: blue;
 // ...
-@import "~svmd/src/sass/svmd";
+@import "~svmd/src/sass";
 ```
 Then, import `./app.scss` instead of `svmd.css` in `main.js`.
 
