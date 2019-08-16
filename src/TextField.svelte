@@ -10,21 +10,27 @@
     label = '',
     placeholder = '';
 
-  const mdc = wrap(MDCTextField);
-
-  function handleInput(event) {
-    value = event.target.value
-  }
+  const mdc = wrap(MDCTextField, {
+    initialize({ root_: input }) {
+      input.addEventListener('input', ({ target }) => {
+        value = target.value;
+      })
+    }
+  });
 
   $: className = createClassname('text-field', {
     fullwidth,
     // outlined,
-    noLabel: !label && !placeholder
+    noLabel: !fullwidth && !label
   })
 </script>
 
 <div class={className} use:mdc>
-  <input {type} {value} on:input={handleInput} class="mdc-text-field__input" aria-label={label} {placeholder}>
+  <input {type} {value} {placeholder}
+    class="mdc-text-field__input"
+    aria-label={label}
+    on:input on:focus on:blur on:change
+    on:keydown on:keyup on:keypress>
   <!-- {#if outlined}
     <div class="mdc-notched-outline">
       <div class="mdc-notched-outline__leading"></div>
