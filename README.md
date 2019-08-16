@@ -8,22 +8,15 @@ yarn add svmd # yarn
 ```
 
 # Usage
-```html
-<!-- App.svelte -->
-<script>
-  import { Button } from 'svmd';
-</script>
-
-<Button raised>Click me</Button>
-```
+SVMD has a variety of components, and you can import them like this:
 ```js
-// main.js
-import App from './App.svelte';
-import 'svmd/dist/svmd.css';
-
-new App({ ... })
+import { Button, Slider, Fab } from 'svmd';
 ```
-> **Note**: `svmd.css` bundles the styles of every single component. It's better to use something like PurgeCSS to remove unwanted CSS code.
+Also, you should import their styles:
+```js
+import 'svmd/dist/svmd.css';
+```
+> **Note**: `svmd.css` file bundles the styles of every single component. It's better to use something like PurgeCSS to remove unwanted CSS code.
 
 ## Customization
 Use the following approach:
@@ -33,9 +26,9 @@ Use the following approach:
 $mdc-theme-primary: red;
 $mdc-theme-secondary: blue;
 // ...
-@import "~svmd/src/sass";
+@import "~svmd/src/sass"; // or "~svmd/src/sass/index"
 ```
-Then, import `./app.scss` instead of `svmd.css` in `main.js`.
+Then, import `./app.scss` instead of `svmd.css`.
 
 # Documentation
 Documentation is **Work In Progress**. See [docs folder](./docs).
