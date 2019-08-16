@@ -7,6 +7,7 @@ export let dense = false,
   outlined = false,
   unelevated = false,
   href = '';
+
 $: props = omit($$props, 'dense', 'raised', 'outlined', 'unelevated', 'href');
 $: className = createClassname('button', { dense, outlined, unelevated, raised })
 </script>

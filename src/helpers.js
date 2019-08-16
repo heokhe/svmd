@@ -27,9 +27,7 @@ export const createClassname = (base, modifiers = {}) => [
     .filter(([, v]) => !!v)
     .map(([k, v]) => {
       let string = `mdc-${base}--${camelToKebab(k)}`;
-      if (['number', 'string'].includes(typeof v)) {
-        string += `-${v}`;
-      }
+      if (['number', 'string'].includes(typeof v)) string += `-${v}`;
       return string;
     })
 ].join(' ');

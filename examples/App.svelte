@@ -35,9 +35,12 @@ const toggleDrawer = () => drawerOpen = !drawerOpen;
   </List>
 </Drawer>
 <div class="mdc-drawer-app-content">
-  <TopAppBar title={title} on:nav-icon-click={toggleDrawer}>
+  <TopAppBar {title} on:nav-icon-click={toggleDrawer}>
     <IconButton on:click={() => title = 'SVMD Playground'}>
       <Icon>refresh</Icon>
+    </IconButton>
+    <IconButton href="https://github.com/hkh12/svmd" target="_blank">
+      <Icon>code</Icon>
     </IconButton>
   </TopAppBar>
   <main class="main-content mdc-top-app-bar--fixed-adjust">
@@ -45,7 +48,10 @@ const toggleDrawer = () => drawerOpen = !drawerOpen;
       <Cell span="4">
         <Button>regular button</Button>
         <Button outlined>outlined</Button>
-        <Button raised>raised</Button>
+        <Button raised>
+          <Icon>favorite</Icon>
+          raised
+        </Button>
         <Button unelevated>unelevated</Button>
       </Cell>
       <Cell span="2">
