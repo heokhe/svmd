@@ -21,29 +21,28 @@ const toggleDrawer = () => drawerOpen = !drawerOpen;
 <svelte:head>
   <title>{title}</title>
 </svelte:head>
-<Drawer bind:open={drawerOpen} dismissible title="Drawer" subtitle="Select an item">
-  <!-- <Input bind:value={title} label="Page Title" placeholder="Playground" /> -->
-  <List twoLine>
-    <ListItem>
-      <ListText>Installation</ListText>
-      <ListText secondary>Using only 10 keystrokes</ListText>
-    </ListItem>
-    <ListItem>
-      <ListText>Documentation</ListText>
-      <ListText secondary>Coming soon...</ListText>
-    </ListItem>
-  </List>
-</Drawer>
-<div class="mdc-drawer-app-content">
-  <TopAppBar {title} on:nav-icon-click={toggleDrawer}>
-    <IconButton on:click={() => title = 'SVMD Playground'}>
-      <Icon>refresh</Icon>
-    </IconButton>
-    <IconButton href="https://github.com/hkh12/svmd" target="_blank">
-      <Icon>code</Icon>
-    </IconButton>
-  </TopAppBar>
-  <main class="main-content mdc-top-app-bar--fixed-adjust">
+<TopAppBar {title} on:nav-icon-click={toggleDrawer}>
+  <IconButton on:click={() => title = 'SVMD Playground'}>
+    <Icon>refresh</Icon>
+  </IconButton>
+  <IconButton href="https://github.com/hkh12/svmd" target="_blank">
+    <Icon>code</Icon>
+  </IconButton>
+</TopAppBar>
+<div class="mdc-top-app-bar--fixed-adjust">
+  <Drawer bind:open={drawerOpen} dismissible title="Drawer" subtitle="Select an item">
+    <List twoLine>
+      <ListItem>
+        <ListText>Installation</ListText>
+        <ListText secondary>Using only 10 keystrokes</ListText>
+      </ListItem>
+      <ListItem>
+        <ListText>Documentation</ListText>
+        <ListText secondary>Coming soon...</ListText>
+      </ListItem>
+    </List>
+  </Drawer>
+  <div class="mdc-drawer-app-content">
     <Grid>
       <Cell span="4">
         <Button>regular button</Button>
@@ -61,14 +60,17 @@ const toggleDrawer = () => drawerOpen = !drawerOpen;
         <Slider bind:value={slider} disabled={!activeTab} displayMarkers step=1 />
         Value: {slider.toString().padStart(3, '0')}
       </Cell>
-      <Cell span="12">
-        <TabBar bind:active={activeTab} narrow>
+      <Cell span="8">
+        <TabBar bind:active={activeTab} stacked>
           {#each tabs as { icon, text }}
             <Tab {icon}>{text || icon}</Tab>
           {/each}
         </TabBar>
       </Cell>
+      <Cell span="4">
+        <Input bind:value={title} placeholder="Playground" /> 
+      </Cell>
     </Grid>
     <Fab icon='edit' fixed extended>toggle rtl</Fab>
-  </main>
+  </div>
 </div>
