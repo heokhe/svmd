@@ -1,9 +1,9 @@
 <script>
-import IconButton from '../IconButton.svelte';
-import Icon from '../Icon.svelte';
+import IconButton from './IconButton.svelte';
+import Icon from './Icon.svelte';
 import { MDCTopAppBar } from '@material/top-app-bar';
-import { wrap } from '../actions';
-import { createClassname } from '../helpers';
+import { wrap } from './actions';
+import { createClassname } from './helpers';
 import { createEventDispatcher } from 'svelte';
 export let fixed = false,
   noNavIcon = false,
