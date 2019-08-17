@@ -22,7 +22,7 @@ export default [
       terser()
     ]
   }, {
-    input: 'src/sass/svmd.scss',
+    input: 'src/sass/index.scss',
     plugins: [postcss('dist/svmd.css', true)],
     output: {
       format: 'es',
