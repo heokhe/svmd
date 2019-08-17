@@ -9,7 +9,7 @@ import Scroller from './TabScroller.svelte';
 export let active = 0,
   stacked = false,
   spanIndicatorToContent = false,
-  narrow = true;
+  narrow = false;
 
 const tabBarData = writable({ stacked, spanIndicatorToContent, narrow });
 setContext('tab-bar-data', tabBarData)
