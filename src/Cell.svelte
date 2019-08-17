@@ -2,18 +2,18 @@
   import { createClassname } from './helpers';
 
   export let position = "",
-    order = 0,
-    span = 0,
-    phone = 0,
-    tablet = 0,
-    desktop = 0;
+    span = void 0,
+    order = void 0,
+    phone = void 0,
+    tablet = void 0,
+    desktop = void 0;
 
   $: className = createClassname('layout-grid__cell', {
     align: position,
     order, span,
-    [`span-${span}-phone`]: !!phone,
-    [`span-${span}-tablet`]: !!tablet,
-    [`span-${span}-desktop`]: !!desktop
+    [`span-${phone}-phone`]: !!phone,
+    [`span-${tablet}-tablet`]: !!tablet,
+    [`span-${desktop}-desktop`]: !!desktop
   })
 </script>
 
