@@ -1,0 +1,19 @@
+@import '@material/rtl/mixins';
+
+.mdc-fab.mdc-fab--fixed {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 5;
+  @media (min-width: 1024px) {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  @include mdc-rtl {
+    right: unset;
+    left: 1rem;
+    @media (min-width: 1024px) {
+      left: 1.5rem;
+    }
+  }
+}
