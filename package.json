@@ -2,8 +2,8 @@
   "name": "svmd",
   "version": "0.1.0",
   "description": "Material design components for Svelte",
-  "module": "dist/index.mjs",
-  "main": "dist/index.js",
+  "module": "dist/svmd.es.js",
+  "main": "dist/svmd.js",
   "scripts": {
     "build": "rollup -c config/prod.js && rm dist/.csstemp",
     "build:dev": "rollup -wc config/dev.js",
