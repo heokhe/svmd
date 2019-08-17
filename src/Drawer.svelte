@@ -5,8 +5,7 @@ import { MDCDrawer } from '@material/drawer';
 export let dismissible = false,
   modal = false,
   open = false,
-  title = '',
-  subtitle = '';
+  withHeader = false;
 const mdc = wrap(MDCDrawer, {
   initialize(drawer) {
     // fixes scrim_ === null
@@ -28,10 +27,14 @@ $: className = createClassname('drawer', { modal, dismissible })
 </script>
 
 <aside use:mdc={open} class={className}>
-  {#if title}
+  {#if withHeader}
     <div class="mdc-drawer__header">
-      <div class="mdc-drawer__title">{title}</div>
-      <div class="mdc-drawer__subtitle">{subtitle}</div>
+      <div class="mdc-drawer__title">
+        <slot name="title"></slot>
+      </div>
+      <div class="mdc-drawer__subtitle">
+        <slot name="subtitle"></slot>
+      </div>
     </div>
   {/if}
   <div class="mdc-drawer__content">
