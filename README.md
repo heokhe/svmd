@@ -16,7 +16,7 @@ Also, you should import their styles:
 ```js
 import 'svmd/dist/svmd.css';
 ```
-> **Note**: `svmd.css` file bundles the styles of every single component. It's better to use something like PurgeCSS to remove unwanted CSS code.
+> **Note**: `svmd.css` file includes styles for every single component. It is recommended to use tools like PurgeCSS to remove unwanted CSS code.
 
 ## Customization
 Use the following approach:
