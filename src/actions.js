@@ -12,27 +12,26 @@ import { createOptionalCaller } from './helpers';
  * })
  * <header use:action>...</header>
  */
-export function wrap(constructor, {
+export const wrap = (constructor, {
   initialize, beforeDestroy, destroy, update, paramDefaultValue = {}
-} = {}) {
-  return (element, param = paramDefaultValue) => {
-    // eslint-disable-next-line new-cap
-    const component = new constructor(element),
-      fire = createOptionalCaller(component, param);
-    fire(initialize);
-    return {
-      destroy() {
-        fire(beforeDestroy);
-        component.destroy();
-        fire(destroy);
-      },
-      // eslint-disable-next-line no-shadow
-      update: param => {
-        createOptionalCaller(component, param)(update);
-      }
-    };
+} = {}) => (element, param = paramDefaultValue) => {
+  // eslint-disable-next-line new-cap
+  const component = new constructor(element),
+    fire = createOptionalCaller(component, param);
+  fire(initialize);
+  return {
+    destroy() {
+      fire(beforeDestroy);
+      component.destroy();
+      fire(destroy);
+    },
+    // eslint-disable-next-line no-shadow
+    update: param => {
+      createOptionalCaller(component, param)(update);
+    }
   };
-}
+};
+
 
 /**
  * An action to wrap MDCRipple component.
