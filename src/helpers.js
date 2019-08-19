@@ -40,3 +40,5 @@ export const createClassname = (base, modifiers = {}) => [
  * oneTwoThree(aFunctionThatDoesNotExist) // returns undefined
  */
 export const createOptionalCaller = (...args) => f => (typeof f === 'function' ? f(...args) : undefined);
+
+export * from './class';
