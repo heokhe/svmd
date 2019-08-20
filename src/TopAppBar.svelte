@@ -3,7 +3,7 @@ import IconButton from './IconButton.svelte';
 import Icon from './Icon.svelte';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { wrap } from './actions';
-import { createClassname } from './helpers';
+import { cls, subcls } from './helpers';
 import { createEventDispatcher } from 'svelte';
 export let fixed = false,
   noNavIcon = false,
@@ -15,29 +15,31 @@ export let fixed = false,
 const mdc = wrap(MDCTopAppBar),
   dispatch = createEventDispatcher(),
   onNavIconClick = e => dispatch('nav-icon-click', e);
-$: className = createClassname('top-app-bar', {
+$: c = cls('top-app-bar', {
   fixed, dense, prominent, short,
   'short-collapsed': alwaysClosed
 })
+$: firstSectionC = subcls(c, 'section', { align: 'start' })
+$: lastSectionC = subcls(c, 'section', { align: 'end' })
 </script>
 
-<header use:mdc class={className}>
-  <div class="mdc-top-app-bar__row">
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+<header use:mdc class={c}>
+  <div class={subcls(c, 'row')}>
+    <section class={firstSectionC}>
       {#if !noNavIcon}
-        <div class="mdc-top-app-bar__navigation-icon">
-          <IconButton class="mdc-top-app-bar__navigation-icon" on:click={onNavIconClick}>
+        <div class={subcls(c, 'navigation-icon')}>
+          <IconButton on:click={onNavIconClick}>
             <Icon>menu</Icon>
           </IconButton>
         </div>
       {/if}
-      <span class="mdc-top-app-bar__title">{title}</span>
+      <span class={subcls(c, 'title')}>{title}</span>
     </section>
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+    <section class={lastSectionC} role="toolbar">
       <slot></slot>
     </section>
   </div>
-  <div class="mdc-top-app-bar__row mdc-top-app-bar__row--tabs">
+  <div class={subcls(c, 'row', { tabs: true })}>
     <slot name="tabs"></slot> 
   </div>
 </header>
