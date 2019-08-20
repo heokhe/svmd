@@ -46,7 +46,8 @@
     "@material/tab-indicator": "^3.1.0",
     "@material/tab-scroller": "^3.1.0",
     "@material/textfield": "^3.1.0",
-    "@material/top-app-bar": "^3.1.0"
+    "@material/top-app-bar": "^3.1.0",
+    "@material/typography": "^3.1.0"
   },
   "repository": {
     "type": "git",
