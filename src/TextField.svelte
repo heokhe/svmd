@@ -14,10 +14,9 @@
 
   const mdc = wrap(MDCTextField, {
     initialize(mdc) {
-      console.log(mdc);
       const input = mdc.root_;
       input.addEventListener('input', ({ target }) => {
-        value = target.value;
+        value = type === 'number' ? target.valueAsNumber : target.value;
       })
     }
   });
@@ -39,11 +38,8 @@
       {leadingIcon}
     </span>
   {/if}
-  <input {type} {value} {placeholder}
-    class={subcls(c, 'input')}
-    aria-label={label}
-    on:input on:focus on:blur on:change
-    on:keydown on:keyup on:keypress>
+  <input {type} {value} {placeholder} class={subcls(c, 'input')} aria-label={label}
+    on:input on:focus on:blur on:change on:keydown on:keyup on:keypress>
   {#if trailingIcon}
     <span class="material-icons {subcls(c, 'icon')}">
       {trailingIcon}
