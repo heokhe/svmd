@@ -4,7 +4,7 @@ body {
 
 @import '@material/theme/color-palette';
 
-$mdc-theme-primary: $material-color-deep-purple-500;
-$mdc-theme-secondary: $material-color-green-a400;
+$mdc-theme-primary: $material-color-green-600;
+$mdc-theme-secondary: $material-color-red-a400;
 
 @import '../src/sass/index';
