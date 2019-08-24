@@ -1,3 +1,3 @@
-<h5 class="mdc-typography--headline5">
+<h5 {...$$props} class="mdc-typography--headline5">
   <slot></slot>
 </h5>
