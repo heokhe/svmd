@@ -10,15 +10,17 @@
 | raised | gives the button a background color (primary) and box shadow.
 | unelevated | behaves like `raised`, but without shadow.
 | href | converts the button into an anchor that points to the specified URL.
+| icon | if present, renders a custom icon before the text label.
 
 # Examples
-```html
+```svelte
 <!-- ripple effect gets activated when the component is mounted -->
 <Button on:click={handleClick}>flat button</Button>
 <Button outlined>outlined</Button>
 <Button dense>smaller button</Button>
 <Button raised>raised</Button>
 <Button unelevated>unelevated</Button>
+<Button raised icon="edit">write something</Button>
 <Button href="http://some.url">
   this one is a link
 </Button>
