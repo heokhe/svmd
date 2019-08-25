@@ -11,12 +11,19 @@
 | label | creates a "floating label" containing the given value.
 | placeholder | input's placeholder text.
 | fullwidth | makes the input take all of the available horizontal space.
+| outlined | draws an outline around the input, and renders a "notched outline".
+| leadingIcon | icon to render before the input.
+| trailingIcon | icon to render after the input.
 
 # Example
 ```svelte
 <script>
   let name = ""; // initial value
+  let number = 20;
   function validate(event) { /* ... */ }
 </script>
+
 <TextField label="Your Name" placeholder="John Doe" bind:value={name} on:change={validate} />
+<TextField label="Your Name" placeholder="John Doe" leadingIcon="person" bind:value={name} on:change={validate} />
+<TextField type="number" bind:value={number} label="Your Age" />
 ```

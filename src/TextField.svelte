@@ -1,6 +1,6 @@
 <script>
   import { wrap } from './actions';
-  import { cls, subcls } from './helpers';
+  import { cls, subcls, omit } from './helpers';
   import { MDCTextField } from '@material/textfield';
 
   export let type = 'text',
@@ -30,6 +30,7 @@
   });
   $: outlineC = cls`notched-outline`;
   $: floatingLabelC = cls`floating-label`;
+  $: props = omit($$props, 'fullwidth', 'leadingIcon', 'trailingIcon', 'label', 'outlined');
 </script>
 
 <div class={c} use:mdc>
@@ -38,7 +39,9 @@
       {leadingIcon}
     </span>
   {/if}
-  <input {type} {value} {placeholder} class={subcls(c, 'input')} aria-label={label}
+  <input {...props}
+    {type} {value} {placeholder}
+    class={subcls(c, 'input')} aria-label={label}
     on:input on:focus on:blur on:change on:keydown on:keyup on:keypress>
   {#if trailingIcon}
     <span class="material-icons {subcls(c, 'icon')}">
