@@ -12,7 +12,7 @@ export default {
     file: 'examples/dist/bundle.js'
   },
   plugins: [
-    svelte(true),
+    svelte({ dev: true }),
     postcss('examples/dist/bundle.css'),
     resolve,
     commonjs(),

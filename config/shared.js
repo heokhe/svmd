@@ -3,7 +3,15 @@ import sveltePlugin from 'rollup-plugin-svelte';
 import postcssPlugin from 'rollup-plugin-postcss';
 import nodeResolve from 'rollup-plugin-node-resolve';
 
-export const svelte = (dev = false) => sveltePlugin({ dev, emitCss: true });
+export const svelte = ({ dev = false, ssr = false } = {}) => {
+  return sveltePlugin({
+    emitCss: true,
+    dev,
+    ...ssr && {
+      generate: 'ssr'
+    }
+  });
+};
 export const postcss = (dest, minimize = false) => postcssPlugin({
   minimize,
   extract: dest,

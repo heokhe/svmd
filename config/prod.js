@@ -21,7 +21,18 @@ export default [
       commonjs(),
       terser()
     ]
-  }, {
+  },
+  {
+    input: 'src/index.js',
+    output: { file: 'dist/ssr.js', format: 'cjs' },
+    plugins: [
+      svelte({ ssr: true }),
+      resolve,
+      commonjs(),
+      terser()
+    ]
+  },
+  {
     input: 'src/sass/index.scss',
     plugins: [postcss('dist/svmd.css', true)],
     output: {
