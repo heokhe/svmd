@@ -9,11 +9,11 @@ export default {
     sourcemap: true,
     format: 'iife',
     name: 'app',
-    file: 'examples/bundle.js'
+    file: 'examples/dist/bundle.js'
   },
   plugins: [
     svelte(true),
-    postcss('examples/bundle.css'),
+    postcss('examples/dist/bundle.css'),
     resolve,
     commonjs(),
     livereload('..', {
