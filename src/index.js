@@ -1,5 +1,6 @@
 export { default as Button } from './Button.svelte';
 export { default as Cell, default as LayoutCell } from './Cell.svelte';
+export { default as Checkbox } from './Checkbox.svelte';
 export { default as Drawer } from './Drawer.svelte';
 export { default as Fab } from './Fab.svelte';
 export { default as Grid, default as LayoutGrid } from './Grid.svelte';

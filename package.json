@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@material/button": "^3.1.0",
+    "@material/checkbox": "^3.1.0",
     "@material/drawer": "^3.1.0",
     "@material/fab": "^3.1.0",
     "@material/form-field": "^3.1.0",
