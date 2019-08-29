@@ -8,19 +8,16 @@
 | open | (boolean) indicates the drawer's state. must be used as `bind:open`.
 | modal | makes the drawer modal, and creates a scrim.
 | dismissible | makes the drawer dismissible.
-| title | drawer header title. if omitted, no header is rendered.
-| subtitle | drawer header subtitle.
+| withHeader | (boolean) renders a header. you can fill it using `title` and `subtitle` slots.
 
 # Example
 ```svelte
 <script>
   let drawerOpen = false;
 </script>
-<Drawer
-  bind:open={drawerOpen}
-  title="John Doe"
-  subtitle="Adminstrator"
-  modal>
+<Drawer bind:open={drawerOpen} modal withHeader>
+  <span slot="title">John Doe</span>
+  <span slot="subtitle">Adminstrator</span>
   <!-- probably a <List> -->
 </Drawer>
 <div class="mdc-drawer-app-content">
