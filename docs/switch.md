@@ -4,6 +4,7 @@
 
 # Props
 | Name | Description
+| - | -
 | checked | Controls the switch value. must be used as `bind:checked`.
 
 # Example

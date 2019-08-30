@@ -1,7 +1,8 @@
 # Typography
 - [MDC Docs](https://material.io/develop/web/components/typography)
 - [MDC Demo](https://material-components.github.io/material-components-web-catalog/#/component/typography)
-## Components
+
+# Components
 ### Headlines
 There are `H1...H6` components, that have no props:
 ```html

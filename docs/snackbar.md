@@ -4,6 +4,7 @@
 
 # Props
 | Name | Description
+| - | -
 | active | (boolean) must be used as `bind:active={someBooleanValue}`.
 | timeout | numbers of seconds that snackbar should stay open. (default: 5)
 | stacked | aligns the text and buttons vertically.
