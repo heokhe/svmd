@@ -12,12 +12,15 @@ export default {
     file: 'examples/dist/bundle.js'
   },
   plugins: [
-    svelte({ dev: true }),
-    postcss('examples/dist/bundle.css'),
     resolve,
     commonjs(),
+    svelte({ dev: true }),
+    postcss('examples/dist/bundle.css'),
     livereload('..', {
       extraExts: ['scss']
     })
-  ]
+  ],
+  watch: {
+    clearScreen: false
+  }
 };

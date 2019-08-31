@@ -15,20 +15,22 @@ export default [
       { file: pkg.main, format: 'cjs' }
     ],
     plugins: [
-      svelte(),
-      postcss('dist/svmd.css', true),
       resolve,
       commonjs(),
+      svelte(),
       terser()
     ]
   },
   {
     input: 'src/index.js',
-    output: { file: 'dist/ssr.js', format: 'cjs' },
+    output: [
+      { file: 'dist/svmd.ssr.js', format: 'cjs' },
+      { file: 'dist/svmd.ssr.es.js', format: 'es' }
+    ],
     plugins: [
-      svelte({ ssr: true }),
       resolve,
       commonjs(),
+      svelte({ ssr: true }),
       terser()
     ]
   },
