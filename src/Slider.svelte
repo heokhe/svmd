@@ -21,6 +21,7 @@
           slider.layout();
         })
       }
+      slider.layout();
     },
     update(slider, { value: newValue, disabled }) {
       slider.value = newValue;
