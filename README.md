@@ -12,23 +12,12 @@ SVMD has a variety of components, and you can import them like this:
 ```js
 import { Button, Slider, Fab } from 'svmd';
 ```
-Also, you should import their styles:
+> For SSR, use the SSR builds. Builds are listed in [here](docs/builds.md)
+Also, you should import the styles:
 ```js
 import 'svmd/dist/svmd.css';
 ```
-> **Note**: `svmd.css` file includes styles for every single component. It is recommended to use tools like PurgeCSS to remove unwanted CSS code.
-
-## Customization
-Use the following approach:
-```scss
-// app.scss
-
-$mdc-theme-primary: red;
-$mdc-theme-secondary: blue;
-// ...
-@import "~svmd/src/sass"; // or "~svmd/src/sass/index"
-```
-Then, import `./app.scss` instead of `svmd.css`.
+See [the docs about styles](docs/styles.md) for more info.
 
 # Documentation
-Documentation is **Work In Progress**. See [docs folder](./docs).
+See [the `docs` folder](./docs).
