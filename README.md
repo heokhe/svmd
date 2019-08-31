@@ -11,13 +11,10 @@ yarn add svmd # yarn
 SVMD has a variety of components, and you can import them like this:
 ```js
 import { Button, Slider, Fab } from 'svmd';
-```
-> For SSR, use the SSR builds. Builds are listed in [here](docs/builds.md)
-Also, you should import the styles:
-```js
 import 'svmd/dist/svmd.css';
 ```
-See [the docs about styles](docs/styles.md) for more info.
+> For SSR, you must use the SSR builds. Builds are listed in [here](docs/builds.md).
+> Also, See [the docs about styles](docs/styles.md) for more info.
 
 # Documentation
 See [the `docs` folder](./docs).
