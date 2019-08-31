@@ -2,16 +2,18 @@
 import {
   Button, TopAppBar, Drawer, Fab, TabBar, Tab, Slider,
   Input, IconButton, Icon, Switch, List, ListItem,
-  ListText, ListDivider, Grid, Cell, H6
+  ListText, ListDivider, Grid, Cell, H6, Snackbar, Checkbox
 } from '../src';
 
 let drawerOpen = false,
-  activeTab = 2,
+  activeTab = 0,
   slider = 35,
   title = 'SVMD Playground',
-  checked = false;
+  checked = false,
+  snackbar = false;
 
 const toggleDrawer = () => drawerOpen = !drawerOpen;
+const reload = () => window.location.reload();
 </script>
 
 <svelte:head>
@@ -21,20 +23,25 @@ const toggleDrawer = () => drawerOpen = !drawerOpen;
 <Drawer bind:open={drawerOpen} modal withHeader>
   <span slot="title">Drawer</span>
   <span slot="subtitle">Select an item</span>
-  <List twoLine>
+  <List>
     <ListItem tabindex="0">
-      <ListText>Installation</ListText>
-      <ListText secondary>Using only 10 keystrokes</ListText>
+      Installation
     </ListItem>
     <ListItem>
-      <ListText>Documentation</ListText>
-      <ListText secondary>Coming soon...</ListText>
+      Documentation
+    </ListItem>
+  </List>
+  <ListDivider />
+  <List twoLine>
+    <ListItem>
+      <ListText>Website</ListText>
+      <ListText secondary>See it!</ListText>
     </ListItem>
   </List>
 </Drawer>
 
 <TopAppBar {title} on:nav-icon-click={toggleDrawer} fixed>
-  <IconButton on:click={() => title = 'SVMD Playground'}>
+  <IconButton on:click={reload}>
     <Icon>refresh</Icon>
   </IconButton>
 </TopAppBar>
@@ -44,9 +51,9 @@ const toggleDrawer = () => drawerOpen = !drawerOpen;
     <Grid>
       <Cell span="12">
         <H6>Buttons</H6>
-        <Button icon="add">regular button</Button>
+        <Button>regular button</Button>
         <Button outlined>outlined</Button>
-        <Button raised icon="favorite">raised</Button>
+        <Button raised icon="favorite">raised with icon</Button>
         <Button unelevated>unelevated</Button>
       </Cell>
 
@@ -57,7 +64,7 @@ const toggleDrawer = () => drawerOpen = !drawerOpen;
 
       <Cell span="2" desktop="5">
         <H6>Sliders</H6>
-        <Slider bind:value={slider} disabled={!activeTab} step="1" />
+        <Slider bind:value={slider} step={1} />
         Value: {slider}/100
       </Cell>
 
@@ -65,16 +72,29 @@ const toggleDrawer = () => drawerOpen = !drawerOpen;
         <H6>Text fields</H6>
         <Input trailingIcon="close" outlined bind:value={title} placeholder="Playground" label="Page Title" /> 
         <br><br>
-        <Input outlined type="number" bind:value={slider} label="Slider value" /> 
+        <Input outlined type="number" inputmode="numeric" bind:value={slider} label="Slider value" /> 
       </Cell>
 
-      <Cell span="12">
+      <Cell span="5">
         <H6>Tabs</H6>
-        <TabBar bind:active={activeTab} stacked narrow spanIndicatorToContent>
+        <TabBar bind:active={activeTab} stacked spanIndicatorToContent>
           <Tab icon="settings">settings</Tab>
           <Tab icon="photo">gallery</Tab>
           <Tab icon="person">contacts</Tab>
         </TabBar>
+      </Cell>
+
+      <Cell span="2">
+        <H6>Snackbars</H6>
+        <Button on:click={() => snackbar = true} raised>open snackbar</Button>
+        <Snackbar bind:active={snackbar} leading>
+          This is an important message.
+        </Snackbar>
+      </Cell>
+
+      <Cell span="2">
+        <H6>Checkboxes</H6>
+        <Checkbox bind:checked={snackbar} />
       </Cell>
     </Grid>
     
