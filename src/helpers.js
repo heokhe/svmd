@@ -33,12 +33,13 @@ export const createClassname = (base, modifiers = {}) => [
 ].join(' ');
 
 /**
- * @example
- * const oneTwoThree = createOptionalCaller(1, 2, 3)
- * oneTwoThree(console.log) // console.log(1, 2, 3)
- * oneTwoThree(Array) // [1, 2, 3]
- * oneTwoThree(aFunctionThatDoesNotExist) // returns undefined
+ * Takes a function that returns an array of arguments,
+ * returns a function that takes some items.
+ * Applies those arguments to the items that are functions.
+ *
+ * That might look useless, but I'm using it for calling hooks in `wrap()`.
+ * All hooks have the same payload, and each of them may be `undefined` or anything else.
  */
-export const createOptionalCaller = (...args) => f => (typeof f === 'function' ? f(...args) : undefined);
+export const createFunctionWrapper = a => (...fns) => fns.map(f => (typeof f === 'function' ? f(...a()) : undefined));
 
 export * from './class';

@@ -1,5 +1,5 @@
 import { MDCRipple } from '@material/ripple';
-import { createOptionalCaller } from './helpers';
+import { createFunctionWrapper } from './helpers';
 
 /**
  * Creates a Svelte action to wrap MDC components.
@@ -13,12 +13,12 @@ import { createOptionalCaller } from './helpers';
  * <header use:action>...</header>
  */
 export const wrap = (constructor, {
-  initialize, beforeDestroy, destroy, update, paramDefaultValue = {}
+  initialize, beforeDestroy, destroy, update, initAndUpdate, paramDefaultValue = {}
 } = {}) => (element, param = paramDefaultValue) => {
   // eslint-disable-next-line new-cap
   const component = new constructor(element),
-    fire = createOptionalCaller(component, param);
-  fire(initialize);
+    fire = createFunctionWrapper(() => [component, param]);
+  fire(initialize, initAndUpdate);
   return {
     destroy() {
       fire(beforeDestroy);
@@ -26,9 +26,7 @@ export const wrap = (constructor, {
       fire(destroy);
     },
     // eslint-disable-next-line no-shadow
-    update: param => {
-      createOptionalCaller(component, param)(update);
-    }
+    update: () => fire(update, initAndUpdate)
   };
 };
 
