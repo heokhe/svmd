@@ -10,9 +10,9 @@ const mdc = wrap(MDCDrawer, {
   initialize(drawer) {
     // fixes scrim_ === null
     setTimeout(() => {
-      drawer.wrapFocus = true
       if (!drawer.focusTrap_) drawer.focusTrap_ = drawer.focusTrapFactory_();
       if (!drawer.scrim_) drawer.initialSyncWithDOM();
+      drawer.wrapFocus = true
       drawer.open = !!open;
       drawer.listen('MDCDrawer:closed', () => {
         open = false
