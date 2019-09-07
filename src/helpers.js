@@ -40,6 +40,6 @@ export const createClassname = (base, modifiers = {}) => [
  * That might look useless, but I'm using it for calling hooks in `wrap()`.
  * All hooks have the same payload, and each of them may be `undefined` or anything else.
  */
-export const createFunctionWrapper = a => (...fns) => fns.map(f => (typeof f === 'function' ? f(...a()) : undefined));
+export const createFunctionWrapper = a => (...fns) => fns.forEach(f => (typeof f === 'function' ? f(...a()) : undefined));
 
 export * from './class';

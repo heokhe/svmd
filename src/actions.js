@@ -26,7 +26,10 @@ export const wrap = (constructor, {
       fire(destroy);
     },
     // eslint-disable-next-line no-shadow
-    update: () => fire(update, initAndUpdate)
+    update(newParam = paramDefaultValue) {
+      param = newParam;
+      fire(update, initAndUpdate);
+    }
   };
 };
 
