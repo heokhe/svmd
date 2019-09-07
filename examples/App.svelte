@@ -3,7 +3,7 @@ import {
   Button, TopAppBar, Drawer, Fab, TabBar, Tab, Slider,
   Input, IconButton, Icon, Switch, List, ListItem,
   ListText, ListDivider, Grid, Cell, H6, Snackbar, Checkbox
-} from '../src';
+} from '../src/components';
 
 let drawerOpen = false,
   activeTab = 0,
@@ -72,7 +72,7 @@ const reload = () => window.location.reload();
         <H6>Text fields</H6>
         <Input trailingIcon="close" outlined bind:value={title} placeholder="Playground" label="Page Title" /> 
         <br><br>
-        <Input outlined type="number" inputmode="numeric" bind:value={slider} label="Slider value" /> 
+        <Input outlined type="number" inputmode="numeric" min="0" max="100" step="1" bind:value={slider} label="Slider value" /> 
       </Cell>
 
       <Cell span="5">

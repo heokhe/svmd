@@ -1,45 +1,44 @@
-import { terser } from 'rollup-plugin-terser';
-import {
-  commonjs,
-  resolve,
-  postcss,
-  svelte
-} from './shared';
-import pkg from '../package.json';
+const { resolve } = require('path'),
+  MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-export default [
-  {
-    input: 'src/index.js',
-    output: [
-      { file: pkg.module, format: 'es' },
-      { file: pkg.main, format: 'cjs' }
-    ],
-    plugins: [
-      resolve,
-      commonjs(),
-      svelte(),
-      terser()
+const createConfig = ({ esModule, includeStyles }) => ({
+  mode: 'production',
+  entry: `./src/${includeStyles ? 'index' : 'components'}.js`,
+  output: {
+    path: resolve(__dirname, '../dist'),
+    filename: `svmd.${esModule ? 'es.js' : 'js'}`,
+    ...!esModule && { libraryTarget: 'commonjs' }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(html|svelte)$/,
+        exclude: /node_modules/,
+        use: 'svelte-loader'
+      },
+      ...includeStyles ? [{
+        test: /\.s[ac]ss$/,
+        use: [
+          MiniCssExtractPlugin.loader, 'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: [resolve('node_modules')]
+              }
+            }
+          }
+        ]
+      }] : []
     ]
   },
-  {
-    input: 'src/index.js',
-    output: [
-      { file: 'dist/svmd.ssr.js', format: 'cjs' },
-      { file: 'dist/svmd.ssr.es.js', format: 'es' }
-    ],
+  ...includeStyles && {
     plugins: [
-      resolve,
-      commonjs(),
-      svelte({ ssr: true }),
-      terser()
+      new MiniCssExtractPlugin({
+        filename: 'svmd.css'
+      })
     ]
-  },
-  {
-    input: 'src/sass/index.scss',
-    plugins: [postcss('dist/svmd.css', true)],
-    output: {
-      format: 'es',
-      file: 'dist/.csstemp'
-    }
   }
-];
+});
+
+module.exports = [createConfig({ esModule: true }), createConfig({ includeStyles: true })];

@@ -5,30 +5,25 @@
   "module": "dist/svmd.es.js",
   "main": "dist/svmd.js",
   "scripts": {
-    "build": "rollup -c config/prod.js && rm dist/.csstemp",
-    "build:dev": "rollup -wc config/dev.js",
-    "serve": "sirv -p 8080 -H 0.0.0.0 -s",
-    "serve:dev": "npm run serve -- -D",
-    "start": "run-p serve:dev build:dev",
-    "prepublishOnly": "npm run build",
-    "docs": "node docs/generator/index.js"
+    "build": "webpack --config config/prod.js --progress",
+    "start": "webpack-dev-server --gzip --quiet --open --silent --progress --config config/dev.js",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@hkh12/eslint-config": "^1.0.1",
+    "css-loader": "^3.2.0",
     "eslint": "^6.1.0",
     "eslint-plugin-svelte3": "^2.7.3",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
-    "npm-run-all": "^4.1.5",
-    "postcss-import": "^12.0.1",
-    "rollup": "^1.11.0",
-    "rollup-plugin-commonjs": "^10.0.1",
-    "rollup-plugin-livereload": "^1.0.1",
-    "rollup-plugin-node-resolve": "^4.2.4",
-    "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-svelte": "^5.0.0",
-    "rollup-plugin-terser": "^5.1.1",
-    "sirv-cli": "^0.4.4",
-    "svelte": "^3.6.10"
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "svelte": "^3.6.10",
+    "svelte-loader": "^2.13.6",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
     "@material/button": "^3.1.0",
