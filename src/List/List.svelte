@@ -1,7 +1,7 @@
 <script>
   import { MDCList } from '@material/list';
   import { wrap } from '../actions';
-  import { createClassname } from '../helpers';
+  import { cls, omit } from '../helpers';
 
   export let dense = false,
     twoLine = false;
@@ -14,9 +14,10 @@
     }
   })
 
-  $: className = createClassname('list', { dense, twoLine });
+  $: className = cls('list', { dense, twoLine });
+  $: props = omit($$props, 'dense', 'twoLine', 'class');
 </script>
 
-<ul class={className} use:mdc>
+<ul {...props} class={className} use:mdc>
   <slot></slot>
 </ul>
