@@ -18,7 +18,7 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     contentBase: './examples/dist',
-    hotOnly: true,
+    hot: true,
     compress: true,
     historyApiFallback: true,
     host: '0.0.0.0',
@@ -31,9 +31,7 @@ module.exports = {
       {
         test: /\.(html|svelte)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'svelte-loader'
-        }
+        use: 'svelte-loader'
       },
       {
         test: /\.s[ac]ss$/,
@@ -55,7 +53,10 @@ module.exports = {
     new HtmlPlugin({
       hash: true,
       title: 'SVMD Playground',
-      meta: { 'theme-color': '#43a047' }
+      meta: {
+        'theme-color': '#43a047',
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
+      }
     })
   ],
   optimization: {
