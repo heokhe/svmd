@@ -6,7 +6,7 @@
   "main": "dist/svmd.js",
   "scripts": {
     "build": "webpack --config config/prod.js --progress",
-    "start": "webpack-dev-server --gzip --quiet --open --silent --progress --config config/dev.js",
+    "start": "webpack-dev-server --progress --config config/dev.js",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {

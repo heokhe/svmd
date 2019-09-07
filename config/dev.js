@@ -18,7 +18,13 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     contentBase: './examples/dist',
-    hot: true
+    hotOnly: true,
+    compress: true,
+    historyApiFallback: true,
+    host: '0.0.0.0',
+    port: 8080,
+    open: true,
+    overlay: true
   },
   module: {
     rules: [
