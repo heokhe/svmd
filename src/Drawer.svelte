@@ -13,14 +13,11 @@ const mdc = wrap(MDCDrawer, {
       if (!drawer.focusTrap_) drawer.focusTrap_ = drawer.focusTrapFactory_();
       if (!drawer.scrim_) drawer.initialSyncWithDOM();
       drawer.wrapFocus = true
-      drawer.open = !!open;
-      drawer.listen('MDCDrawer:closed', () => {
-        open = false
-      });
+      drawer.listen('MDCDrawer:closed', () => open = false);
     }, 0);
   },
-  update(drawer, isOpen) {
-    if (isOpen !== drawer.open) drawer.open = isOpen
+  initAndUpdate(drawer, open) {
+    if (!!open !== drawer.open) drawer.open = !!open
   }
 })
 $: className = createClassname('drawer', { modal, dismissible })
