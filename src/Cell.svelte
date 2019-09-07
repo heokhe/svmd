@@ -1,15 +1,17 @@
 <script>
   import { createClassname } from './helpers';
+  import { getContext } from 'svelte';
 
-  export let position = "",
-    span = void 0,
+  export let span = void 0,
     order = void 0,
     phone = void 0,
     tablet = void 0,
     desktop = void 0;
 
+  const align = getContext('grid-data');
+
   $: className = createClassname('layout-grid__cell', {
-    align: position,
+    align: $align,
     order, span,
     [`span-${phone}-phone`]: !!phone,
     [`span-${tablet}-tablet`]: !!tablet,

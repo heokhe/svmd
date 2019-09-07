@@ -9,6 +9,7 @@
 | Name | Description
 | --- | ---
 | align | aligns the grid to a direction (possible values: left, right). grid is aligned to center by default.
+| verticalAlign |  (`top`, `middle` or `bottom`) aligns each cell in the given direction. items take up the height of their corresponding row, by default.
 | fixedWidth | tells each column to have a certain width.
 ## Cell
 > also exported as `LayoutCell`
@@ -20,4 +21,3 @@
 | tablet | `span` on tablets.
 | desktop | `span` on desktop screens.
 | order | (integer between 1 and 12) re-orders item. by default, items are positioned in the source order.
-| align | (`top`, `middle` or `bottom`) aligns the cell in the given direction. items take up the height of their corresponding row, by default.

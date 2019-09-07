@@ -1,11 +1,19 @@
 <script>
-  import { createClassname } from './helpers';
+  import { cls } from './helpers';
+  import { writable } from 'svelte/store';
+  import { setContext } from 'svelte';
 
   export let fixedWidth = false,
-    align = '';
+    noPadding = false,
+    align = '',
+    verticalAlign = 'top';
 
-  $: className = createClassname('layout-grid', {
+  const data = writable(verticalAlign);
+  setContext('grid-data', data)
+
+  $: className = cls('layout-grid', {
     fixedColumnWidth: fixedWidth,
+    noPadding,
     align
   })
 </script>

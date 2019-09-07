@@ -1,1 +1,5 @@
 @import '@material/layout-grid/mdc-layout-grid';
+
+.mdc-layout-grid.mdc-layout-grid--no-padding {
+  padding: 0;
+}
