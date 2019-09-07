@@ -27,13 +27,13 @@ const reload = () => window.location.reload();
     <ListItem tabindex="0">
       Installation
     </ListItem>
-    <ListItem>
+    <ListItem icon="book">
       Documentation
     </ListItem>
   </List>
   <ListDivider />
   <List twoLine>
-    <ListItem>
+    <ListItem icon="web">
       <ListText>Website</ListText>
       <ListText secondary>See it!</ListText>
     </ListItem>
