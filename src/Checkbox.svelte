@@ -25,7 +25,11 @@
       }
     });
 
-  $: if ($formField && self) $formField.input = self;
+  $: if (formField && self) {
+    formField.update(ff => {
+      ff.input = self;
+    });
+  }
   $: c = cls('checkbox', { disabled });
   $: props = omit($$props, 'id', 'checked', 'disabled');
 </script>
