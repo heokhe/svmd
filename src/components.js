@@ -3,6 +3,7 @@ export { default as Cell, default as LayoutCell } from './Cell.svelte';
 export { default as Checkbox } from './Checkbox.svelte';
 export { default as Drawer } from './Drawer.svelte';
 export { default as Fab } from './Fab.svelte';
+export { default as FormField } from './FormField.svelte';
 export { default as Grid, default as LayoutGrid } from './Grid.svelte';
 export { default as Icon } from './Icon.svelte';
 export { default as IconButton } from './IconButton.svelte';
