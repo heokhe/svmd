@@ -1,4 +1,5 @@
 <script>
+  import Icon from './Icon.svelte';
   import { wrap } from './actions';
   import { cls, subcls, omit } from './helpers';
   import { MDCTextField } from '@material/textfield';
@@ -22,32 +23,30 @@
   });
 
   $: c = cls('text-field', {
-    fullwidth,
-    outlined,
+    fullwidth, outlined,
     noLabel: !fullwidth && !label,
     withLeadingIcon: !!leadingIcon,
     withTrailingIcon: !!trailingIcon
   });
   $: outlineC = cls`notched-outline`;
   $: floatingLabelC = cls`floating-label`;
-  $: props = omit($$props, 'fullwidth', 'leadingIcon', 'trailingIcon', 'label', 'outlined');
+  $: props = omit($$props, 'fullwidth', 'leadingIcon', 'trailingIcon', 'label', 'outlined', 'placeholder', 'type');
 </script>
 
 <div class={c} use:mdc>
   {#if leadingIcon}
-    <span class="material-icons {subcls(c, 'icon')}">
-      {leadingIcon}
-    </span>
+    <Icon class={subcls(c, 'icon')}>{leadingIcon}</Icon>
   {/if}
+
   <input {...props}
     {type} {value} {placeholder}
     class={subcls(c, 'input')} aria-label={label}
     on:input on:focus on:blur on:change on:keydown on:keyup on:keypress>
+
   {#if trailingIcon}
-    <span class="material-icons {subcls(c, 'icon')}">
-      {trailingIcon}
-    </span>
+    <Icon class={subcls(c, 'icon')}>{trailingIcon}</Icon>
   {/if}
+
   {#if outlined}
     <div class={outlineC}>
       <div class={subcls(outlineC, 'leading')}></div>
@@ -57,9 +56,11 @@
       <div class={subcls(outlineC, 'trailing')}></div>
     </div>
   {/if}
+
   {#if !fullwidth && !outlined && label}
     <label class={floatingLabelC}>{label}</label>
   {/if}
+
   {#if !outlined}
     <div class="mdc-line-ripple"></div>
   {/if}

@@ -4,11 +4,10 @@
   import { MDCSwitch } from '@material/switch';
 
   export let checked = false;
+
   const mdc = wrap(MDCSwitch, {
     initialize(mdcSwitch) {
-      mdcSwitch.listen('change', () => {
-        checked = mdcSwitch.checked;
-      })
+      mdcSwitch.listen('change', () => checked = mdcSwitch.checked)
     },
     initAndUpdate(mdcSwitch, checkbox) {
       mdcSwitch.checked = checked;
@@ -24,4 +23,3 @@
     </div>
   </div>
 </div>
-<!-- <label for="basic-switch">off/on</label> -->
