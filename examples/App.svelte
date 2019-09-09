@@ -1,7 +1,7 @@
 <script>
 import {
   Button, TopAppBar, Drawer, Fab, TabBar, Tab, Slider,
-  Input, IconButton, Icon, Switch, List, ListItem,
+  Input, IconButton, Icon, Switch, List, ListItem, FormField,
   ListText, ListDivider, Grid, Cell, H6, Snackbar, Checkbox
 } from '../src/components';
 
@@ -49,7 +49,7 @@ const reload = () => window.location.reload();
 <div class="mdc-top-app-bar--fixed-adjust">
   <div class="mdc-drawer-app-content">
     <Grid>
-      <Cell span="12">
+      <Cell span="6">
         <H6>Buttons</H6>
         <Button>regular button</Button>
         <Button outlined>outlined</Button>
@@ -57,44 +57,56 @@ const reload = () => window.location.reload();
         <Button unelevated>unelevated</Button>
       </Cell>
 
-      <Cell span="2" desktop="3">
-        <H6>Switches</H6>
-        <Switch bind:checked />
-      </Cell>
-
-      <Cell span="2" desktop="5">
-        <H6>Sliders</H6>
-        <Slider bind:value={slider} step={1} />
-        Value: {slider}/100
-      </Cell>
-
-      <Cell phone="4">
-        <H6>Text fields</H6>
-        <Input trailingIcon="close" outlined bind:value={title} placeholder="Playground" label="Page Title" /> 
-        <br><br>
-        <Input outlined type="number" inputmode="numeric" min="0" max="100" step="1" bind:value={slider} label="Slider value" /> 
-      </Cell>
-
-      <Cell span="5">
+      <Cell span="6">
         <H6>Tabs</H6>
-        <TabBar bind:active={activeTab} stacked spanIndicatorToContent>
+        <TabBar bind:active={activeTab}>
           <Tab icon="settings">settings</Tab>
           <Tab icon="photo">gallery</Tab>
           <Tab icon="person">contacts</Tab>
         </TabBar>
       </Cell>
 
-      <Cell span="2">
+      <Cell span="6">
+        <H6>Sliders</H6>
+        <Slider bind:value={slider} step={1} />
+        <Slider bind:value={slider} step={1} discrete />
+        Value: {slider}/100
+      </Cell>
+
+      <Cell span="6">
+        <H6>Text fields</H6>
+        <Grid noPadding>
+          <Cell desktop="6" phone="4">
+            <Input trailingIcon="close" outlined bind:value={title} placeholder="Playground" label="Page Title" />
+          </Cell>
+          <Cell desktop="3" phone="2">
+            <Input outlined type="number" inputmode="numeric" min="0" max="100" step="1" bind:value={slider} label="Slider value" />   
+          </Cell>
+          <Cell desktop="3" phone="2">
+            <Input type="number" inputmode="numeric" min="0" max="100" step="1" bind:value={slider} label="Slider value" />  
+          </Cell>
+        </Grid>
+      </Cell>
+
+      <Cell phone="4" span="3">
         <H6>Snackbars</H6>
         <Button on:click={() => snackbar = true} raised>open snackbar</Button>
-        <Snackbar bind:active={snackbar} leading>
+        <Snackbar bind:active={snackbar}>
           This is an important message.
         </Snackbar>
       </Cell>
 
       <Cell span="2">
+        <H6>Switches</H6>
+        <Switch bind:checked />
+      </Cell>
+
+      <Cell span="2">
         <H6>Checkboxes</H6>
-        <Checkbox bind:checked={snackbar} />
+        <FormField>
+          <Checkbox id="mycheckbox" bind:checked />
+          <label for="mycheckbox">{checked ? 'On' : 'Off'} ({checked})</label>
+        </FormField>
       </Cell>
     </Grid>
     
