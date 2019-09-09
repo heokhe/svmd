@@ -1,7 +1,7 @@
 <script>
 import Icon from './Icon.svelte';
 import { ripple } from './actions';
-import { omit, createClassname } from './helpers';
+import { omit, cls, subcls } from './helpers';
 
 export let dense = false,
   raised = false,
@@ -11,24 +11,24 @@ export let dense = false,
   href = '';
 
 $: props = omit($$props, 'dense', 'raised', 'outlined', 'unelevated', 'href');
-$: className = createClassname('button', { dense, outlined, unelevated, raised })
+$: c = cls('button', { dense, outlined, unelevated, raised })
 </script>
 
 {#if href}
-  <a {href} {...props} use:ripple class={className} on:click on:keydown on:keypress on:keyup on:mouseover>
+  <a {href} {...props} use:ripple class={c} on:click on:keydown on:keypress on:keyup on:mouseover>
     {#if icon}
-      <span class="mdc-button__icon material-icons">{icon}</span>
+      <Icon class={subcls(c, 'icon')}>{icon}</Icon>
     {/if}
-    <span class="mdc-button__label">
+    <span class={subcls(c, 'label')}>
       <slot></slot>
     </span>
   </a>
 {:else}
-  <button {...props} use:ripple class={className} on:click on:keydown on:keypress on:keyup on:mouseover>
+  <button {...props} use:ripple class={c} on:click on:keydown on:keypress on:keyup on:mouseover>
     {#if icon}
-      <span class="mdc-button__icon material-icons">{icon}</span>
+      <Icon class={subcls(c, 'icon')}>{icon}</Icon>
     {/if}
-    <span class="mdc-button__label">
+    <span class={subcls(c, 'label')}>
       <slot></slot>
     </span>
   </button>

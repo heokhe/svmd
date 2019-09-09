@@ -1,27 +1,29 @@
 <script>
+  import Icon from '../Icon.svelte';
   import { ripple } from '../actions';
-  import { omit } from '../helpers';
+  import { omit, cls, subcls } from '../helpers';
   export let tabindex = void 0,
     href = undefined,
     icon = '';
-  $: props = omit($$props, 'href', 'class', icon);
+  $: props = omit($$props, 'href', 'class', 'icon');
+  $: c = cls`list-item`;
 </script>
 
 {#if href !== undefined}
-  <a {...props} {href} class="mdc-list-item" use:ripple>
+  <a {...props} {href} class="{c} {$$props.class}" use:ripple>
     {#if icon}
-      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">{icon}</i>
+      <Icon aria-hidden="true" class={subcls(c, 'graphic')}>{icon}</Icon>
     {/if}
-    <div class="mdc-list-item__text">
+    <div class={subcls(c, 'text')}>
       <slot></slot>
     </div>
   </a>
 {:else}
-  <li {...props} class="mdc-list-item" use:ripple>
+  <li {...props} class="{c} {$$props.class}" use:ripple>
     {#if icon}
-      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">{icon}</i>
+      <Icon aria-hidden="true" class={subcls(c, 'graphic')}>{icon}</Icon>
     {/if}
-    <div class="mdc-list-item__text">
+    <div class={subcls(c, 'text')}>
       <slot></slot>
     </div>
   </li>
