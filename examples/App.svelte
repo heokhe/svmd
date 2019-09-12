@@ -1,6 +1,6 @@
 <script>
 import {
-  Button, TopAppBar, Drawer, Fab, TabBar, Tab, Slider,
+  Button, TopAppBar, Drawer, Fab, TabBar, Tab, Slider, Radio,
   Input, IconButton, Icon, Switch, List, ListItem, FormField,
   ListText, ListDivider, Grid, Cell, H6, Snackbar, Checkbox
 } from '../src/components';
@@ -10,7 +10,8 @@ let drawerOpen = false,
   slider = 35,
   title = 'SVMD Playground',
   checked = false,
-  snackbar = false;
+  snackbar = false,
+  color = '';
 
 const toggleDrawer = () => drawerOpen = !drawerOpen;
 const reload = () => window.location.reload();
@@ -70,6 +71,7 @@ const reload = () => window.location.reload();
         <H6>Sliders</H6>
         <Slider bind:value={slider} step={1} />
         <Slider bind:value={slider} step={1} discrete />
+        <Slider bind:value={slider} step={10} discrete displayMarkers />
         Value: {slider}/100
       </Cell>
 
@@ -88,12 +90,24 @@ const reload = () => window.location.reload();
         </Grid>
       </Cell>
 
-      <Cell phone="4" span="3">
+      <Cell span="2">
         <H6>Snackbars</H6>
-        <Button on:click={() => snackbar = true} raised>open snackbar</Button>
+        <Button on:click={() => snackbar = true} raised>open it!</Button>
         <Snackbar bind:active={snackbar}>
           This is an important message.
         </Snackbar>
+      </Cell>
+
+      <Cell span="2">
+        <H6>Radio Buttons</H6>
+        {#each ['red', 'green', 'blue'] as value}
+          <FormField>
+            <Radio id="radio-{value}" {value} bind:group={color} />
+            <label for="radio-{value}" style="text-transform: capitalize">{value}</label>
+          </FormField>
+          <br>
+        {/each}
+        <span>Selected color: {color}</span>
       </Cell>
 
       <Cell span="2">
