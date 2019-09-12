@@ -1,6 +1,6 @@
 {
   "name": "svmd",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Material design components for Svelte",
   "module": "dist/svmd.es.js",
   "main": "dist/svmd.js",
