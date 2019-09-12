@@ -30,6 +30,12 @@
 | inset | increases the leading margin of the divider so that it does not intersect the avatar column.
 | padded | leaves gaps on each side of divider to match padding of `list-item__meta`.
 
+## ListGroup
+No props are provided.
+
+## ListSubheader
+No props are provided.
+
 # Examples
 - Simple:
 ```html
@@ -55,4 +61,19 @@
     <ListText secondary>Read more...</ListText>    
   </ListItem>
 </List>
+```
+- Grouped:
+```svelte
+<ListGroup>
+  <ListSubheader>Group 1</ListSubheader>
+  <List>
+    <ListItem>Item</ListItem>
+  </List>
+</ListGroup>
+<ListGroup>
+  <ListSubheader>Group 2</ListSubheader>
+  <List>
+    <ListItem>Item</ListItem>
+  </List>
+</ListGroup>
 ```
