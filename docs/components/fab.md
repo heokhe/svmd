@@ -14,6 +14,8 @@
 # Examples
 ```html
 <Fab icon="add" />
+<!-- this one is a link: -->
+<Fab icon="open_in_new" href="https://somewhere.com" />
 <Fab icon="add" extended>create</Fab>
 <Fab extended>label-only</Fab>
 ```
