@@ -1,5 +1,9 @@
 # SVMD
-SVMD is a set of Material design components for Svelte. Actually, it's a port of [Google's MDC](https://material.io/develop/web) using the _simple approach_.
+SVMD is a set of **Material Design components** for **Svelte**. It wraps each of [Google's MDC Web vanilla Components](https://material.io/develop/web) using the simple approach. It is:
+- ✨ Easy to use
+- 📚 Well-documented
+- 🎨 Highly customizable
+- 🌳 Tree-shakeable
 
 # Installation
 ```sh
@@ -13,8 +17,7 @@ SVMD has a variety of components, and you can import them like this:
 import { Button, Slider, Fab } from 'svmd';
 import 'svmd/dist/svmd.css';
 ```
-> For SSR, you must use the SSR builds. Builds are listed in [here](docs/builds.md).
-> Also, See [the docs about styles](docs/styles.md) for more info.
+> See [the docs about styles](docs/styles.md) for more info about the components' styles.
 
 # Documentation
 See [the `docs` folder](./docs).
