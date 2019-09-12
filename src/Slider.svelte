@@ -17,21 +17,22 @@
         value = slider.value;
       });
       for (const e of ['closed', 'opened']) {
-        window.addEventListener(`MDCDrawer:${e}`, () => {
-          slider.layout();
-        })
+        window.addEventListener(`MDCDrawer:${e}`, slider.layout)
       }
       slider.layout();
     },
-    update(slider, { value: newValue, disabled }) {
+    update(slider, { value: newValue, disabled, max, min, step }) {
       slider.value = newValue;
       slider.disabled = disabled;
+      slider.min = min;
+      slider.step = step;
+      slider.max = max;
     }
   })
   $: className = createClassname('slider', { discrete, displayMarkers });
 </script>
 
-<div use:mdc={{ value, disabled }}
+<div use:mdc={{ value, disabled, max, min, step }}
   class={className}
   tabindex="0" role="slider"
   aria-valuemin={min} aria-valuemax={max}
