@@ -5,8 +5,7 @@
   import { MDCCheckbox } from '@material/checkbox';
 
   export let disabled = false,
-    checked = false,
-    id = undefined;
+    checked = false;
 
   let self, event;
   const formField = getContext('SVMD:form-field'),
@@ -31,11 +30,14 @@
     });
   }
   $: c = cls('checkbox', { disabled });
-  $: props = omit($$props, 'id', 'checked', 'disabled');
+  $: props = omit($$props, 'checked', 'disabled', 'class');
 </script>
 
-<div {...props} class={c} use:mdc={checked}>
-  <input type="checkbox" class={subcls(c, 'native-control')} {disabled} {id}>
+<div class="{c} {$$props.class}" use:mdc={checked}>
+  <input
+    {...props}
+    type="checkbox" {disabled}
+    class={subcls(c, 'native-control')}>
   <div class={subcls(c, 'background')}>
     <svg class={subcls(c, 'checkmark')} viewBox="0 0 24 24">
       <path class={subcls(c, 'checkmark-path')} fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
