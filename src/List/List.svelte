@@ -9,8 +9,6 @@
   const mdc = wrap(MDCList, {
     initialize(list) {
       list.wrapFocus = true;
-      list.singleSelection = true;
-      list.selectedIndex = 0;
     }
   })
 
