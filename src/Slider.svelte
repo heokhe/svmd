@@ -17,7 +17,7 @@
         value = slider.value;
       });
       for (const e of ['closed', 'opened']) {
-        window.addEventListener(`MDCDrawer:${e}`, slider.layout)
+        window.addEventListener(`MDCDrawer:${e}`, () => slider.layout())
       }
       slider.layout();
     },
