@@ -5,35 +5,40 @@
   import { MDCCheckbox } from '@material/checkbox';
 
   export let disabled = false,
-    checked = false;
+    group = undefined,
+    value = undefined,
+    checked = undefined;
 
-  let self, event;
+  $: usesGroup = Array.isArray(group);
+
+  function handleChange(checkbox) {
+    const isChecked = checkbox.checked;
+    if (usesGroup) {
+      const index = group.indexOf(value);
+      if (!isChecked && index !== -1) group.splice(index, 1);
+      else if (isChecked && index === -1) group.push(value);
+      group = group;
+    } else checked = isChecked;
+  }
+
+  let event;
   const formField = getContext('SVMD:form-field'),
     mdc = wrap(MDCCheckbox, {
       initialize(checkbox) {
-        self = checkbox;
-        event = checkbox.root_.addEventListener('change', () => {
-          checked = checkbox.checked
-        });
+        event = checkbox.root_.addEventListener('change', () => handleChange(checkbox));
+        if (formField) formField.update(ff => ff && (ff.input = checkbox))
       },
-      destroy({ root_: el }) {
-        el.removeEventListener(event)
+      initAndUpdate(checkbox, { checked, value, group }) {
+        checkbox.checked = usesGroup ? group.includes(value) : checked;
       },
-      initAndUpdate(checkbox, checked) {
-        checkbox.checked = checked;
-      }
+      destroy: ({ root_: el }) => el.removeEventListener(event)
     });
 
-  $: if (formField && self) {
-    formField.update(ff => {
-      ff.input = self;
-    });
-  }
   $: c = cls('checkbox', { disabled });
-  $: props = omit($$props, 'checked', 'disabled', 'class');
+  $: props = omit($$props, 'checked', 'disabled', 'class', 'group', 'value');
 </script>
 
-<div class="{c} {$$props.class}" use:mdc={checked}>
+<div class="{c} {$$props.class}" use:mdc={{ checked, value, group }}>
   <input
     {...props}
     type="checkbox" {disabled}
