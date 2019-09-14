@@ -9,9 +9,7 @@
   let data = writable(null);
   setContext('SVMD:form-field', data);
   const mdc = wrap(MDCFormField, {
-    initialize(ff) {
-      data.set(ff);
-    }
+    initialize: ff => data.set(ff)
   })
 </script>
 
