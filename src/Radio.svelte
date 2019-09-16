@@ -13,7 +13,7 @@
     mdc = wrap(MDCRadio, {
       initialize(radio) {
         self = radio;
-        event = radio.root_.addEventListener('input', ( )=> {
+        event = radio.root_.addEventListener('change', () => {
           if (radio.checked) group = value;
         });
       },
