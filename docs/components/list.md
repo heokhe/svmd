@@ -70,17 +70,23 @@ Components that don't have any props are not included below.
 ```svelte
 <List>
   <ListItem>
-    <ListItemGraphic>person</ListItemGraphic>
+    <ListItemGraphic>
+      <Icon>person</Icon>
+    </ListItemGraphic>
     <ListItemContent>John Doe</ListItemContent>
     <ListItemMeta>User</ListItemMeta>
   </ListItem>
   <ListItem>
-    <ListItemGraphic>account_box</ListItemGraphic>
+    <ListItemGraphic>
+      <Icon>account_box</Icon>
+    </ListItemGraphic>
     <ListItemContent>Carl Johnson</ListItemContent>
     <ListItemMeta>Admin</ListItemMeta>
   </ListItem>
   <ListItem>
-    <ListItemGraphic>dns</ListItemGraphic>
+    <ListItemGraphic>
+      <Icon>dns</Icon>
+    </ListItemGraphic>
     <ListItemContent>ManagerBot</ListItemContent>
     <ListItemMeta>Bot</ListItemMeta>
   </ListItem>
