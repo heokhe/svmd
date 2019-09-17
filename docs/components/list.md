@@ -3,19 +3,26 @@
 - [MDC Demo](https://material-components.github.io/material-components-web-catalog/#/component/list)
 
 # Components
+Components that don't have any props are not included below.
 ## List
 ### Props
 | Name | Description
 | - | -
 | dense | reduces the height of items.
 | twoLine | use it to place two lines in at item, instead of one.
+| singleSelection | (boolean) activates single selection mode.
+| selectedIndex | index of selected item in singleSelection mode. must be used as `bind:selectedIndex`.
+| checkbox | allows placing [checkboxes](./checkbox.md) in the items.
+| radio | allows placing [radio buttons](./radio.md) in the items.
 
 ## ListItem
+> **Note**: Declare a tabindex attribute (most likely `tabindex="0"`) on the first list item in a drawer. Otherwise,  `MDCDrawer` will raise an error.
+
+## ListItemMeta
 ### Props
 | Name | Description
 | - | -
-| tabindex | value for `tabindex` HTML attribute.
-> **Note**: It is required to use a `tabindex` (usually `tabindex="0"`) on the first list item in a drawer. Otherwise,  `MDCDrawer` will raise an error.
+| icon | pass `true` to render an icon.
 
 ## ListItemText
 ### Props
@@ -30,50 +37,64 @@
 | inset | increases the leading margin of the divider so that it does not intersect the avatar column.
 | padded | leaves gaps on each side of divider to match padding of `list-item__meta`.
 
-## ListGroup
-No props are provided.
-
-## ListSubheader
-No props are provided.
-
 # Examples
-- Simple:
-```html
+## Basic example
+```svelte
 <List>
-  <ListItem tabindex="0">Item one</ListItem>
-  <ListItem>Item two</ListItem>
-  <ListItem>Item three</ListItem>
+  <ListItem>
+    <ListItemContent>Item one</ListItemContent>
+  </ListItem>
+  <ListItem>
+    <ListItemContent>Item two</ListItemContent>
+  </ListItem>
 </List>
 ```
-- Two lines:
-```html
+## Using `twoLine` prop
+```svelte
 <List twoLine>
-  <ListItem tabindex="0">
-    <ListItemText>Item one</ListItemText>
-    <ListItemText secondary>A description</ListItemText>
+  <ListItem>
+    <ListItemContent>
+      <ListItemText>Item one</ListItemText>
+      <ListItemText secondary>A description</ListItemText>
+    </ListItemContent>
   </ListItem>
   <ListItem>
-    <ListItemText>Item two</ListItemText>
-    <ListItemText secondary>Some extra text</ListItemText>    
-  </ListItem>
-  <ListItem>
-    <ListItemText>Item three</ListItemText>
-    <ListItemText secondary>Read more...</ListItemText>    
+    <ListItemContent>
+      <ListItemText>Item two</ListItemText>
+      <ListItemText secondary>A short caption</ListItemText>
+    </ListItemContent>
   </ListItem>
 </List>
 ```
-- Grouped:
+## Meta & Graphics
+```svelte
+<List>
+  <ListItem>
+    <ListItemGraphic>person</ListItemGraphic>
+    <ListItemContent>John Doe</ListItemContent>
+    <ListItemMeta>User</ListItemMeta>
+  </ListItem>
+  <ListItem>
+    <ListItemGraphic>account_box</ListItemGraphic>
+    <ListItemContent>Carl Johnson</ListItemContent>
+    <ListItemMeta>Admin</ListItemMeta>
+  </ListItem>
+  <ListItem>
+    <ListItemGraphic>dns</ListItemGraphic>
+    <ListItemContent>ManagerBot</ListItemContent>
+    <ListItemMeta>Bot</ListItemMeta>
+  </ListItem>
+</List>
+```
+Note that you can put anything into ListItemMeta, such as icon buttons, regular text, checkboxes, radio buttons, and also icons (you must pass `icon={true}` to ListItemMeta).
+## Grouped
 ```svelte
 <ListGroup>
   <ListSubheader>Group 1</ListSubheader>
-  <List>
-    <ListItem>Item</ListItem>
-  </List>
+  <!-- A <List> -->
 </ListGroup>
 <ListGroup>
   <ListSubheader>Group 2</ListSubheader>
-  <List>
-    <ListItem>Item</ListItem>
-  </List>
+  <!-- Another <List> -->
 </ListGroup>
 ```
