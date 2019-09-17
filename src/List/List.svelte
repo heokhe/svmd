@@ -7,7 +7,7 @@
 
   export let dense = false,
     twoLine = false,
-    checklist = false,
+    checkbox = false,
     radio = false,
     singleSelection = false,
     selectedIndex = -1,
@@ -28,10 +28,10 @@
 
   const role = writable('');
   setContext('svmd:list:role', role);
-  $: $role = checklist ? 'group' : radio ? 'radiogroup' : singleSelection ? 'listbox' : 'list';
+  $: $role = checkbox ? 'group' : radio ? 'radiogroup' : singleSelection ? 'listbox' : 'list';
 
   $: c = cls('list', { dense, twoLine, nonInteractive });
-  $: props = omit($$props, 'dense', 'twoLine', 'class', 'checklist', 'radio');
+  $: props = omit($$props, 'dense', 'twoLine', 'class', 'checkbox', 'radio');
 </script>
 
 <ul {...props} class={c} role={$role}
