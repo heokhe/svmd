@@ -19,7 +19,8 @@ const createConfig = ({ esModule, includeStyles }) => ({
       ...includeStyles ? [{
         test: /\.s[ac]ss$/,
         use: [
-          MiniCssExtractPlugin.loader, 'css-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           {
             loader: 'sass-loader',
             options: {

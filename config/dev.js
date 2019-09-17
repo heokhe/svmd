@@ -1,5 +1,6 @@
 const path = require('path'),
-  HtmlPlugin = require('html-webpack-plugin');
+  HtmlPlugin = require('html-webpack-plugin'),
+  MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -36,7 +37,8 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-          'style-loader', 'css-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           {
             loader: 'sass-loader',
             options: {
@@ -50,6 +52,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'app.css'
+    }),
     new HtmlPlugin({
       hash: true,
       title: 'SVMD Playground',
