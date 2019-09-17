@@ -6,4 +6,4 @@ export { default as ListItemContent } from './ListItemContent.svelte';
 export { default as ListItemMeta } from './ListItemMeta.svelte';
 export { default as ListItemGraphic } from './ListItemGraphic.svelte';
 export { default as ListSubheader } from './ListSubheader.svelte';
-export { default as ListText } from './ListText.svelte';
+export { default as ListItemText } from './ListItemText.svelte';

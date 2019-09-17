@@ -17,7 +17,7 @@
 | tabindex | value for `tabindex` HTML attribute.
 > **Note**: It is required to use a `tabindex` (usually `tabindex="0"`) on the first list item in a drawer. Otherwise,  `MDCDrawer` will raise an error.
 
-## ListText
+## ListItemText
 ### Props
 | Name | Description
 | - | -
@@ -49,16 +49,16 @@ No props are provided.
 ```html
 <List twoLine>
   <ListItem tabindex="0">
-    <ListText>Item one</ListText>
-    <ListText secondary>A description</ListText>
+    <ListItemText>Item one</ListItemText>
+    <ListItemText secondary>A description</ListItemText>
   </ListItem>
   <ListItem>
-    <ListText>Item two</ListText>
-    <ListText secondary>Some extra text</ListText>    
+    <ListItemText>Item two</ListItemText>
+    <ListItemText secondary>Some extra text</ListItemText>    
   </ListItem>
   <ListItem>
-    <ListText>Item three</ListText>
-    <ListText secondary>Read more...</ListText>    
+    <ListItemText>Item three</ListItemText>
+    <ListItemText secondary>Read more...</ListItemText>    
   </ListItem>
 </List>
 ```
