@@ -1,16 +1,18 @@
 <script>
-  import { getContext, onMount } from 'svelte';
+  import { getContext } from 'svelte';
   import { ripple } from '../actions';
   import { omit } from '../helpers';
 
   export let href = undefined;
 
-  const listRole = getContext('svmd:list:role');
+  const parentListRole = getContext('svmd:list:role');
+
   $: role = ({
     group: 'checkbox',
-    radiogroup: 'radio'
-  })[$listRole];
-
+    radiogroup: 'radio',
+    listbox: 'option',
+    list: 'listitem'
+  })[$parentListRole] || '';
   $: props = omit($$props, 'href', 'class');
   $: c = `mdc-list-item mdc-ripple-upgraded ${$$props.class}`;
 </script>
