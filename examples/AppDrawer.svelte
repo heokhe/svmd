@@ -1,6 +1,6 @@
 <script>
   import {
-    Drawer, List, ListGroup, ListDivider, ListItem, Icon, ListText,
+    Drawer, List, ListGroup, ListDivider, ListItem, Icon, ListItemText,
     ListItemContent, ListItemMeta, ListSubheader, ListItemGraphic
   } from '../src/components';
   export let open;
@@ -8,31 +8,39 @@
 
 <Drawer bind:open modal>
   <ListGroup>
-    <ListSubheader>One line</ListSubheader>
+    <ListSubheader>Users</ListSubheader>
     <List>
       <ListItem tabindex="0">
         <ListItemGraphic><Icon>person</Icon></ListItemGraphic>
-        <ListItemContent>Hosein</ListItemContent>
+        <ListItemContent>John Doe</ListItemContent>
         <ListItemMeta>Admin</ListItemMeta>
       </ListItem>
       <ListItem>
-        <ListItemGraphic><Icon>dns</Icon></ListItemGraphic>
-        <ListItemContent>Madeline</ListItemContent>
-        <ListItemMeta>Gohkhor</ListItemMeta>
+        <ListItemGraphic><Icon>add</Icon></ListItemGraphic>
+        <ListItemContent>Add a user</ListItemContent>
       </ListItem>
     </List>
   </ListGroup>
   <ListDivider />
   <ListGroup>
-    <ListSubheader>Two lines</ListSubheader>
+    <ListSubheader>Links</ListSubheader>
     <List twoLine>
       <ListItem href="https://github.com/hkh12/svmd" target="_blank">
         <ListItemGraphic>
           <Icon>code</Icon>
         </ListItemGraphic>
         <ListItemContent>
-          <ListText>Source code</ListText>
-          <ListText secondary>Available on GitHub</ListText>
+          <ListItemText>Source code</ListItemText>
+          <ListItemText secondary>Available on GitHub</ListItemText>
+        </ListItemContent>
+      </ListItem>
+      <ListItem href="https://svmd.surge.sh" target="_blank">
+        <ListItemGraphic>
+          <Icon>web</Icon>
+        </ListItemGraphic>
+        <ListItemContent>
+          <ListItemText>Website</ListItemText>
+          <ListItemText secondary>Documentation, ...</ListItemText>
         </ListItemContent>
       </ListItem>
     </List>
