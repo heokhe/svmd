@@ -8,11 +8,11 @@
 </script>
 
 {#if href}
-  <a {...props} {href} class="mdc-icon-button" use:ripple={true} on:click>
+  <a {...props} {href} class="mdc-icon-button"  on:click>
     <slot class="mdc-icon-button__icon"></slot>
   </a>
 {:else}
-  <button {...props} class="mdc-icon-button" use:ripple={true} on:click>
+  <button {...props} class="mdc-icon-button"  on:click>
     <slot class="mdc-icon-button__icon"></slot>
   </button>
 {/if}

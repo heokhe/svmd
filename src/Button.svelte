@@ -15,7 +15,7 @@ $: c = cls('button', { dense, outlined, unelevated, raised })
 </script>
 
 {#if href}
-  <a {href} {...props} use:ripple class={c} on:click on:keydown on:keypress on:keyup on:mouseover>
+  <a {href} {...props}  class={c} on:click on:keydown on:keypress on:keyup on:mouseover>
     {#if icon}
       <Icon class={subcls(c, 'icon')}>{icon}</Icon>
     {/if}
@@ -24,7 +24,7 @@ $: c = cls('button', { dense, outlined, unelevated, raised })
     </span>
   </a>
 {:else}
-  <button {...props} use:ripple class={c} on:click on:keydown on:keypress on:keyup on:mouseover>
+  <button {...props}  class={c} on:click on:keydown on:keypress on:keyup on:mouseover>
     {#if icon}
       <Icon class={subcls(c, 'icon')}>{icon}</Icon>
     {/if}

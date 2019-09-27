@@ -1,7 +1,7 @@
 <script>
 import IconButton from './IconButton.svelte';
 import Icon from './Icon.svelte';
-import { MDCTopAppBar } from '@material/top-app-bar';
+// import { MDCTopAppBar } from '@material/top-app-bar';
 import { wrap } from './actions';
 import { cls, subcls } from './helpers';
 import { createEventDispatcher } from 'svelte';
@@ -12,8 +12,8 @@ export let fixed = false,
   short = false,
   alwaysClosed = false,
   title = '';
-const mdc = wrap(MDCTopAppBar),
-  dispatch = createEventDispatcher(),
+// const mdc = wrap(MDCTopAppBar),
+const dispatch = createEventDispatcher(),
   onNavIconClick = e => dispatch('nav-icon-click', e);
 $: c = cls('top-app-bar', {
   fixed, dense, prominent, short,
@@ -23,7 +23,7 @@ $: firstSectionC = subcls(c, 'section', { align: 'start' })
 $: lastSectionC = subcls(c, 'section', { align: 'end' })
 </script>
 
-<header use:mdc class={c}>
+<header  class={c}>
   <div class={subcls(c, 'row')}>
     <section class={firstSectionC}>
       {#if !noNavIcon}

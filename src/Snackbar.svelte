@@ -1,31 +1,45 @@
 <script>
   import { cls, subcls } from './helpers';
   import { wrap } from './actions';
-  import { MDCSnackbar } from '@material/snackbar';
 
   export let active = false,
-    timeout = 5,
+    duration = 5,
     stacked = false,
     leading = false;
 
-  const mdc = wrap(MDCSnackbar, {
-    initialize(snackbar, params) {
-      snackbar.timeoutMs = timeout * 1000;
-      for (const event of ['closing', 'opening']) {
-        snackbar.listen(`MDCSnackbar:${event}`, () => {
-          active = event === 'opening';
-        })
-      }
-    },
-    update(snackbar, params) {
-      return params.active ? snackbar.open() : snackbar.close();
-    }
-  });
+  let opening = false,
+    open = false,
+    closing = false,
+    timer = null;
 
-  $: c = cls('snackbar', { stacked, leading });
+  const setTimer = () => (timer = setTimeout(closeTheSnackbar, duration * 1000));
+  function openTheSnachbar() {
+    closing = false;
+    opening = true;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        open = true;
+        opening = false;
+        setTimer();
+      })
+    })
+  }
+  function closeTheSnackbar() {
+    clearTimeout(timer);
+    timer = null;
+    closing = true;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        open = false;
+      })
+    })
+  }
+  $: (active ? openTheSnachbar : closeTheSnackbar)()
+
+  $: c = cls('snackbar', { stacked, leading, opening, open, closing });
 </script>
 
-<div use:mdc={{ active }} class={c}>
+<div  class={c}>
   <div class={subcls(c, 'surface')}>
     <div class={subcls(c, 'label')}>
       <slot></slot>

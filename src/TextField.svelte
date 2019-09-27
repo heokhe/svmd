@@ -2,7 +2,7 @@
   import Icon from './Icon.svelte';
   import { wrap } from './actions';
   import { cls, subcls, omit } from './helpers';
-  import { MDCTextField } from '@material/textfield';
+  // import { MDCTextField } from '@material/textfield';
 
   export let type = 'text',
     value = '',
@@ -13,14 +13,14 @@
     trailingIcon = '',
     placeholder = '';
 
-  const mdc = wrap(MDCTextField, {
-    initialize(mdc) {
-      const input = mdc.root_;
-      input.addEventListener('input', ({ target }) => {
-        value = type === 'number' ? target.valueAsNumber : target.value;
-      })
-    }
-  });
+  // const mdc = wrap(MDCTextField, {
+  //   initialize(mdc) {
+  //     const input = mdc.root_;
+  //     input.addEventListener('input', ({ target }) => {
+  //       value = type === 'number' ? target.valueAsNumber : target.value;
+  //     })
+  //   }
+  // });
 
   $: c = cls('text-field', {
     fullwidth, outlined,
@@ -33,7 +33,7 @@
   $: props = omit($$props, 'fullwidth', 'leadingIcon', 'trailingIcon', 'label', 'outlined', 'placeholder', 'type');
 </script>
 
-<div class={c} use:mdc>
+<div class={c} >
   {#if leadingIcon}
     <Icon class={subcls(c, 'icon')}>{leadingIcon}</Icon>
   {/if}

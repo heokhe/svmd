@@ -1,8 +1,5 @@
 <script>
-  import { getContext } from 'svelte';
   import { cls, subcls, omit } from './helpers';
-  import { wrap } from './actions';
-  import { MDCCheckbox } from '@material/checkbox';
 
   export let disabled = false,
     group = undefined,
@@ -11,8 +8,9 @@
 
   $: usesGroup = Array.isArray(group);
 
-  function handleChange(checkbox) {
-    const isChecked = checkbox.checked;
+  let input;
+  function handleClick() {
+    const isChecked = input.checked;
     if (usesGroup) {
       const index = group.indexOf(value);
       if (!isChecked && index !== -1) group.splice(index, 1);
@@ -21,27 +19,17 @@
     } else checked = isChecked;
   }
 
-  let event;
-  const formField = getContext('SVMD:form-field'),
-    mdc = wrap(MDCCheckbox, {
-      initialize(checkbox) {
-        event = checkbox.root_.addEventListener('change', () => handleChange(checkbox));
-        if (formField) formField.update(ff => ff && (ff.input = checkbox))
-      },
-      initAndUpdate(checkbox, { checked, value, group }) {
-        checkbox.checked = usesGroup ? group.includes(value) : checked;
-      },
-      destroy: ({ root_: el }) => el.removeEventListener(event)
-    });
-
+  $: checked = usesGroup ? group.includes(value) : checked;
   $: c = cls('checkbox', { disabled });
   $: props = omit($$props, 'checked', 'disabled', 'class', 'group', 'value');
 </script>
 
-<div class="{c} {$$props.class}" use:mdc={{ checked, value, group }}>
-  <input
+<div class="{c} {$$props.class}">
+  <input bind:this={input}
+    on:change={handleClick}
     {...props}
-    type="checkbox" {disabled}
+    type="checkbox" 
+    {disabled} {checked}
     class={subcls(c, 'native-control')}>
   <div class={subcls(c, 'background')}>
     <svg class={subcls(c, 'checkmark')} viewBox="0 0 24 24">

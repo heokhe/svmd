@@ -18,11 +18,11 @@
 </script>
 
 {#if href !== undefined}
-  <a {...props} {role} {href} class={c} use:ripple>
+  <a {...props} {role} {href} class={c} >
     <slot></slot>
   </a>
 {:else}
-  <li {...props} {role} class={c} use:ripple>
+  <li {...props} {role} class={c} >
     <slot></slot>
   </li>
 {/if}

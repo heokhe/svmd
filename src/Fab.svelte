@@ -14,7 +14,7 @@ $: className = createClassname('fab', { extended, mini, exited, fixed })
 </script>
 
 {#if href === undefined}
-  <button {...props} use:ripple class={className} on:click>
+  <button {...props}  class={className} on:click>
     {#if icon && !iconTrailing}
       <div class="mdc-fab__icon"><Icon>{icon}</Icon></div>
     {/if}
@@ -28,7 +28,7 @@ $: className = createClassname('fab', { extended, mini, exited, fixed })
     {/if}
   </button>
 {:else}
-  <a {...props} {href} use:ripple class={className} on:click>
+  <a {...props} {href}  class={className} on:click>
     {#if icon && !iconTrailing}
       <div class="mdc-fab__icon"><Icon>{icon}</Icon></div>
     {/if}

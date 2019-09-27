@@ -37,7 +37,7 @@ export const wrap = (constructor, {
 /**
  * An action to wrap MDCRipple component.
  * @example
- * <button use:ripple>Click me to see the ripple effect!</button>
+ * <button >Click me to see the ripple effect!</button>
  */
 export const ripple = wrap(MDCRipple, {
   paramDefaultValue: false,

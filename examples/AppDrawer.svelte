@@ -2,7 +2,7 @@
   import {
     Drawer, List, ListGroup, ListDivider, ListItem, Icon, ListItemText,
     ListItemContent, ListItemMeta, ListSubheader, ListItemGraphic
-  } from '../src/components';
+  } from '../src';
   export let open;
 </script>
 

@@ -24,7 +24,7 @@ module.exports = {
     historyApiFallback: true,
     host: '0.0.0.0',
     port: 8080,
-    open: true,
+    // open: true,
     overlay: true
   },
   module: {
@@ -37,8 +37,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
+          'style-loader', 'css-loader',
           {
             loader: 'sass-loader',
             options: {
@@ -52,9 +51,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'app.css'
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: 'app.css'
+    // }),
     new HtmlPlugin({
       hash: true,
       title: 'SVMD Playground',

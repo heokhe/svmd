@@ -4,7 +4,7 @@
     Button, TopAppBar, Fab, TabBar, Tab, Slider,
     Input, IconButton, Icon, Switch, FormField,
     Grid, Cell, H6, Snackbar, Checkbox, Radio
-  } from '../src/components';
+  } from '../src';
 
   let drawerOpen = false,
     activeTab = 0,
@@ -65,8 +65,8 @@
 
     <Cell span="2">
       <H6>Snackbars</H6>
-      <Button on:click={() => snackbar = true} raised>open it!</Button>
-      <Snackbar bind:active={snackbar}>
+      <Button on:click={() => snackbar = !snackbar} raised>open it!</Button>
+      <Snackbar bind:active={snackbar} duration={4}>
         This is an important message.
       </Snackbar>
     </Cell>
