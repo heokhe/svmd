@@ -1,8 +1,6 @@
 <script>
   import Icon from './Icon.svelte';
-  import { wrap } from './actions';
   import { cls, subcls, omit } from './helpers';
-  // import { MDCTextField } from '@material/textfield';
 
   export let type = 'text',
     value = '',
@@ -13,14 +11,9 @@
     trailingIcon = '',
     placeholder = '';
 
-  // const mdc = wrap(MDCTextField, {
-  //   initialize(mdc) {
-  //     const input = mdc.root_;
-  //     input.addEventListener('input', ({ target }) => {
-  //       value = type === 'number' ? target.valueAsNumber : target.value;
-  //     })
-  //   }
-  // });
+  function handleInput({ target }) {
+    value = type === 'number' ? target.valueAsNumber : target.value;
+  }
 
   $: c = cls('text-field', {
     fullwidth, outlined,
@@ -40,6 +33,7 @@
 
   <input {...props}
     {type} {value} {placeholder}
+    on:input={handleInput}
     class={subcls(c, 'input')} aria-label={label}
     on:input on:focus on:blur on:change on:keydown on:keyup on:keypress>
 
