@@ -45,7 +45,9 @@ export const createFunctionWrapper = a => (...fns) => fns.forEach(f => (typeof f
 export const clamp = (value, { min, max, step }) => {
   if (value >= max) return max;
   if (value <= min) return min;
-  return (Math.floor(value / step) * step) + ((value % step) >= (step / 2) ? step : 0);
+  return step
+    ? (Math.floor(value / step) * step) + ((value % step) >= (step / 2) ? step : 0)
+    : value;
 };
 
 export * from './class';
