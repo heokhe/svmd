@@ -9,54 +9,62 @@
     min = 0,
     max = 100,
     displayMarkers = false,
-    step = 0;
+    step = undefined;
 
   /** @type {Element} */
   let root, track, thumb;
   let width = 0;
-  let mousedown = false;
+  let active = false;
+  let inTransit = false;
 
-  function setValueFromMouseEvent(event) {
-    const { clientX: x } = event.touches ? event.touches[0] : event;
+  function setValueFromMouseEvent({ clientX, touches: [touch] = [] }) {
+    const x = touch ? touch.clientX : clientX;
     const px = x - root.getBoundingClientRect().x;
     const pr = px / width
     value = clamp((pr * (max - min)) + min, { step, min, max })
   }
   function handleMouseDown(event) {
-    mousedown = true;
+    const { path, button } = event;
+    if (button === 2 || !path.includes(root)) return;
+    inTransit = !path.includes(thumb);
+    setTimeout(() => (inTransit = false), 200);
+    active = true;
     setValueFromMouseEvent(event);
   }
-  function handleMouseMove(event) {
-    if (mousedown) setValueFromMouseEvent(event);
-  }
-  const handleMouseUp = () => mousedown && (mousedown = false);
-  $: percentage = (value - min) / (max - min) * 100;
+  const handleMouseMove = evt => !evt.touches && active && setValueFromMouseEvent(evt);
+  const handleMouseUp = () => active && (active = false);
+
+  $: clampedValue = clamp(value, { min, max, step });
+  $: percentage = (clampedValue - min) / (max - min) * 100;
   $: if (thumb) thumb.style.transform = `translateX(${percentage / 100 * width}px) translateX(-50%)`;
-  $: if (track) track.style.transform = `scaleX(${percentage / 100})`
-  $: className = cls('slider', {
-    discrete, displayMarkers,
-    active: mousedown, /* inTransit: mousedown */
-  });
+  $: if (track) track.style.transform = `scaleX(${percentage / 100})`;
+  $: className = cls('slider', { discrete, displayMarkers, active, inTransit });
 </script>
 
-<svelte:window on:mousemove={handleMouseMove} on:mouseup={handleMouseUp} on:touchmove={handleMouseDown} on:touchend={handleMouseUp}></svelte:window>
+<svelte:window
+  on:mousemove={handleMouseMove}
+  on:mouseup={handleMouseUp}
+  on:touchmove={handleMouseDown}
+  on:touchend={handleMouseUp}></svelte:window>
 <div bind:this={root} bind:clientWidth={width}
-  on:mousedown={handleMouseDown}
-  class={className}
+  on:mousedown={handleMouseDown} class={className}
   tabindex="0" role="slider"
   aria-valuemin={min} aria-valuemax={max}
-  aria-valuenow={value} data-step={step}
-  aria-disabled={disabled}>
+  aria-valuenow={clampedValue} aria-disabled={disabled}>
     <div class="mdc-slider__track-container">
       <div class="mdc-slider__track" bind:this={track}></div>
       {#if discrete && displayMarkers}
-        <div class="mdc-slider__track-marker-container"></div>
+        <div class="mdc-slider__track-marker-container">
+          {#each Array((max - min) / step) as _}
+            <div class="mdc-slider__track-marker"></div>
+          {/each}
+        </div>
       {/if}
     </div>
     <div class="mdc-slider__thumb-container" bind:this={thumb}>
       {#if discrete}
         <div class="mdc-slider__pin">
-          <span class="mdc-slider__pin-value-marker">{value}</span>
+          <span class="mdc-slider__pin-value-marker">{clampedValue}</span>
         </div>
       {/if}
       <svg class="mdc-slider__thumb" width="21" height="21">
