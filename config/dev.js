@@ -58,7 +58,7 @@ module.exports = {
       hash: true,
       title: 'SVMD Playground',
       meta: {
-        'theme-color': '#43a047',
+        'theme-color': '#303F9F',
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'
       }
     })

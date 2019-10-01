@@ -6,7 +6,7 @@ body {
 
 @import '@material/theme/color-palette';
 
-$mdc-theme-primary: $material-color-green-600;
-$mdc-theme-secondary: $material-color-red-a400;
+$mdc-theme-primary: $material-color-indigo-700;
+$mdc-theme-secondary: $material-color-pink-a400;
 
 @import '../src/sass/index';
