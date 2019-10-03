@@ -17,7 +17,7 @@
     value = type === 'number' ? target.valueAsNumber : target.value;
   }
 
-  $: isNotEmpty = focused || !!value;
+  $: isNotEmpty = focused || !(value === '' || value === undefined);
   $: nolWidth = notchedOutlineLabel ? notchedOutlineLabel.clientWidth : 0;
   $: notchWidth = isNotEmpty ? `${nolWidth - 13}px` : 'unset';
   $: c = cls('text-field', {
