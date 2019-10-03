@@ -11,28 +11,36 @@
     trailingIcon = '',
     placeholder = '';
 
+  let focused = false, notchedOutlineLabel;
+
   function handleInput({ target }) {
     value = type === 'number' ? target.valueAsNumber : target.value;
   }
 
+  $: isNotEmpty = focused || !!value;
+  $: nolWidth = notchedOutlineLabel ? notchedOutlineLabel.clientWidth : 0;
+  $: notchWidth = isNotEmpty ? `${nolWidth - 13}px` : 'unset';
   $: c = cls('text-field', {
-    fullwidth, outlined,
+    fullwidth, outlined, focused,
     noLabel: !fullwidth && !label,
     withLeadingIcon: !!leadingIcon,
     withTrailingIcon: !!trailingIcon
   });
-  $: outlineC = cls`notched-outline`;
-  $: floatingLabelC = cls`floating-label`;
+  $: outlineC = cls('notched-outline', { upgraded: true, notched: isNotEmpty });
+  $: lineRippleC = cls('line-ripple', { active: focused })
+  $: floatingLabelC = cls('floating-label', { floatAbove: isNotEmpty });
   $: props = omit($$props, 'fullwidth', 'leadingIcon', 'trailingIcon', 'label', 'outlined', 'placeholder', 'type');
 </script>
 
-<div class={c} >
+<div class={c}>
   {#if leadingIcon}
     <Icon class={subcls(c, 'icon')}>{leadingIcon}</Icon>
   {/if}
 
   <input {...props}
     {type} {value} {placeholder}
+    on:focus={() => focused = true}
+    on:blur={() => focused = false}
     on:input={handleInput}
     class={subcls(c, 'input')} aria-label={label}
     on:input on:focus on:blur on:change on:keydown on:keyup on:keypress>
@@ -43,11 +51,13 @@
 
   {#if outlined}
     <div class={outlineC}>
-      <div class={subcls(outlineC, 'leading')}></div>
-      <div class={subcls(outlineC, 'notch')}>
-        <label class={floatingLabelC}>{label}</label>
-      </div>
-      <div class={subcls(outlineC, 'trailing')}></div>
+        <div class={subcls(outlineC, 'leading')}></div>
+        {#if label}
+          <div class={subcls(outlineC, 'notch')} style="width: {notchWidth}">
+            <label class={floatingLabelC} bind:this={notchedOutlineLabel}>{label}</label>
+          </div>
+        {/if}
+        <div class={subcls(outlineC, 'trailing')}></div>
     </div>
   {/if}
 
@@ -56,6 +66,6 @@
   {/if}
 
   {#if !outlined}
-    <div class="mdc-line-ripple"></div>
+    <div class={lineRippleC}></div>
   {/if}
 </div>
