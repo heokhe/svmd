@@ -1,6 +1,7 @@
 <script>
-  import { onMount, tick } from 'svelte';
+  import { onMount } from 'svelte';
   import { wrap } from './actions';
+  import { createEventToggler } from './events';
   import { cls, clamp } from './helpers';
 
   export let discrete = false,
@@ -11,14 +12,12 @@
     displayMarkers = false,
     step = undefined;
 
-  /** @type {Element} */
   let root, track, thumb;
   let width = 0;
   let active = false;
   let focus = false;
   const layout = () => (width = root.clientWidth);
   onMount(layout);
-  // let inTransit = true;
 
   function setValueFromMouseEvent({ clientX, touches: [touch] = [] }) {
     const x = touch ? touch.clientX : clientX;
@@ -33,8 +32,6 @@
     }
     const { path, button } = event;
     if (button === 2 || !path.includes(root)) return;
-    // inTransit = !path.includes(thumb);
-    // setTimeout(() => (inTransit = false), 200);
     setValueFromMouseEvent(event);
   }
   function handleKeydown(event) {
@@ -55,28 +52,31 @@
     }
   }
   const handleMouseMove = evt => !evt.touches && active && setValueFromMouseEvent(evt);
-  // const handleMouseUp = () => (inTransit = true) && active && (active = false);
   const handleMouseUp = () => (layout(), active && (active = false));
+  const toggleWindowListeners = createEventToggler(window, {
+    mousemove: handleMouseMove,
+    mouseup: handleMouseUp,
+    touchmove: handleMouseDown,
+    touchend: handleMouseUp
+  });
 
+  $: toggleWindowListeners(active) || console.log(active);
   $: if (discrete && displayMarkers && !step) step = 1;
   $: clampedValue = clamp(value, { min, max, step });
   $: percentage = (clampedValue - min) / (max - min) * 100;
   $: if (thumb) thumb.style.transform = `translateX(${percentage / 100 * width}px) translateX(-50%)`;
   $: if (track) track.style.transform = `scaleX(${percentage / 100})`;
-  // $: className = cls('slider', { discrete, displayMarkers, active, inTransit });
   $: className = cls('slider', { discrete, displayMarkers, active, focus });
 </script>
 
-<svelte:window
-  on:mousemove={handleMouseMove}
-  on:mouseup={handleMouseUp}
-  on:resize={() => (width = root.clientWidth)}
-  on:touchmove={handleMouseDown}
-  on:touchend={handleMouseUp}></svelte:window>
+<svelte:window on:resize={() => (width = root.clientWidth)}></svelte:window>
 
 <div bind:this={root}
-  on:focus={() => focus = !active} on:blur={() => focus = false}
-  on:mousedown={handleMouseDown} on:keydown={handleKeydown}
+  on:focus={() => focus = !active}
+  on:blur={() => focus = false}
+  on:mousedown={handleMouseDown}
+  on:touchstart={handleMouseDown}
+  on:keydown={handleKeydown}
   class={className} tabindex="0" role="slider"
   aria-valuemin={min} aria-valuemax={max}
   aria-valuenow={clampedValue} aria-disabled={disabled}>
