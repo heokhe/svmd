@@ -1,21 +1,53 @@
 <script>
-// import { MDCTab } from '@material/tab';
-import { wrap } from '../actions';
 import { cls, subcls } from '../helpers';
-import { getContext } from 'svelte';
+import { getContext, onMount } from 'svelte';
 import Icon from '../Icon.svelte';
 import Indicator from './TabIndicator.svelte';
 
-export let icon = '';
-const tabBarData = getContext('tab-bar-data')
-// const mdc = wrap(MDCTab);
+const randomTabId = () => `svmd-tab-item-${Math.random() * 1e6 >> 0}`;
+
+export let icon = '',
+  id = randomTabId();
+const tabBar = getContext('SVMD:tab-bar-tabBar'),
+  items = getContext('SVMD:tab-bar-items');
+
+let tab,
+  width = 0;
+
+let idx = -1;
+onMount(() => {
+  idx = $items.push({ element: tab }) - 1;
+  $items = $items;
+})
+
+function sync(node) {
+  return {
+    update(newParams) {
+      Object.assign($items[idx], newParams);
+      $items = $items;
+    },
+    destroy() {
+      $items.splice(idx, 1);
+      $items = $items;
+    }
+  }
+}
+
+$: ready = idx >= 0;
+const handleClick = () => ready && $tabBar.activate(id);
+$: isActive = ready && $tabBar.active === idx;
 $: c = cls('tab', {
-  stacked: $tabBarData.stacked,
-  minWidth: $tabBarData.narrow
+  stacked: $tabBar.stacked,
+  minWidth: $tabBar.narrow,
+  active: isActive
 });
 </script>
 
-<button  class={c} role="tab" aria-selected="false" tabindex="-1">
+<button bind:clientWidth={width} bind:this={tab}
+  use:sync={{ id, width }}
+  on:click={handleClick}
+  {id} class={c} role="tab"
+  aria-selected="false" tabindex="-1">
   <span class={subcls(c, 'content')}>
     {#if icon}
       <span class={subcls(c, 'icon')} aria-hidden="true">
@@ -25,12 +57,6 @@ $: c = cls('tab', {
     <span class={subcls(c, 'text-label')}>
       <slot></slot>
     </span>
-    {#if $tabBarData.spanIndicatorToContent}
-      <Indicator />
-    {/if}
   </span>
-  {#if !$tabBarData.spanIndicatorToContent}
-    <Indicator />
-  {/if}
   <span class="{subcls(c, 'ripple')}"></span>
 </button>

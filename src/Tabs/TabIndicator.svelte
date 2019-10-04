@@ -1,22 +1,14 @@
 <script>
-// import { MDCTabIndicator } from '@material/tab-indicator';
-import { wrap } from '../actions';
-import { createClassname } from '../helpers';
+import { cls, subcls } from '../helpers';
 
-export let type = 'underline',
-  fade = false;
-// const mdc = wrap(MDCTabIndicator);
+export let active = false,
+  left = 0,
+  width = '100%';
 
-$: {
-  if (!['icon', 'underline'].includes(type)) {
-    console.warn(`TabIndicator expected the type to be "icon" or "underline", got "${type}"`);
-    type = 'underline'
-  }
-}
-$: className = createClassname('tab-indicator', { fade });
-$: contentClassname = createClassname('tab-indicator__content', { [type]: true })
+$: c = cls('tab-indicator', { active });
+$: contentC = subcls(c, 'content', { underline: true })
 </script>
 
-<span  class={className}>
-  <span class={contentClassname}></span>
+<span class={c}>
+  <span class={contentC} style="transform: translateX({left}px); width: {width}"></span>
 </span>
