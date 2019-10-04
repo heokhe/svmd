@@ -2,3 +2,7 @@
 @import '@material/tab-bar/mdc-tab-bar';
 @import '@material/tab-indicator/mdc-tab-indicator';
 @import '@material/tab-scroller/mdc-tab-scroller';
+
+.mdc-tab-indicator .mdc-tab-indicator__content {
+  transition-property: width, transform;
+}
