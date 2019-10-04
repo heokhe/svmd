@@ -16,6 +16,8 @@
   let width = 0;
   let active = false;
   let focus = false;
+  const layout = () => (width = root.clientWidth);
+  onMount(layout);
   // let inTransit = true;
 
   function setValueFromMouseEvent({ clientX, touches: [touch] = [] }) {
@@ -25,14 +27,18 @@
     value = clamp((pr * (max - min)) + min, { step, min, max })
   }
   function handleMouseDown(event) {
+    if (!active) {
+      active = true;
+      layout();
+    }
     const { path, button } = event;
     if (button === 2 || !path.includes(root)) return;
     // inTransit = !path.includes(thumb);
     // setTimeout(() => (inTransit = false), 200);
-    active = true;
     setValueFromMouseEvent(event);
   }
   function handleKeydown(event) {
+    if (!focus) focus = true;
     const { key } = event,
       st = step || 1,
       diff = key === 'ArrowLeft' ? -st :
@@ -50,7 +56,7 @@
   }
   const handleMouseMove = evt => !evt.touches && active && setValueFromMouseEvent(evt);
   // const handleMouseUp = () => (inTransit = true) && active && (active = false);
-  const handleMouseUp = () => active && (active = false);
+  const handleMouseUp = () => (layout(), active && (active = false));
 
   $: if (discrete && displayMarkers && !step) step = 1;
   $: clampedValue = clamp(value, { min, max, step });
@@ -64,10 +70,11 @@
 <svelte:window
   on:mousemove={handleMouseMove}
   on:mouseup={handleMouseUp}
+  on:resize={() => (width = root.clientWidth)}
   on:touchmove={handleMouseDown}
   on:touchend={handleMouseUp}></svelte:window>
 
-<div bind:this={root} bind:clientWidth={width}
+<div bind:this={root}
   on:focus={() => focus = !active} on:blur={() => focus = false}
   on:mousedown={handleMouseDown} on:keydown={handleKeydown}
   class={className} tabindex="0" role="slider"
