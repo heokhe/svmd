@@ -20,8 +20,8 @@ const tabBar = writable({
     active = $items.findIndex(tab => tab.id === id);
   }
 });
-setContext('SVMD:tab-bar-tabBar', tabBar);
-setContext('SVMD:tab-bar-items', items);
+setContext('SVMD:tab-bar:props', tabBar);
+setContext('SVMD:tab-bar:items', items);
 
 $: activeTab = $items[$tabBar.active] || {};
 $: activeEl = activeTab.element;

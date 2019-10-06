@@ -1,6 +1,6 @@
 <script>
 import { cls, subcls } from '../helpers';
-import { getContext, onMount } from 'svelte';
+import { getContext, onMount, afterUpdate } from 'svelte';
 import Icon from '../Icon.svelte';
 import Indicator from './TabIndicator.svelte';
 
@@ -8,17 +8,20 @@ const randomTabId = () => `svmd-tab-item-${Math.random() * 1e6 >> 0}`;
 
 export let icon = '',
   id = randomTabId();
-const tabBar = getContext('SVMD:tab-bar-tabBar'),
-  items = getContext('SVMD:tab-bar-items');
+const tabBar = getContext('SVMD:tab-bar:props'),
+  items = getContext('SVMD:tab-bar:items');
 
 let tab,
   width = 0;
 
+const setWidth = () => (width = tab.clientWidth)
 let idx = -1;
 onMount(() => {
+  setWidth();
   idx = $items.push({ element: tab }) - 1;
   $items = $items;
-})
+});
+afterUpdate(setWidth);
 
 function sync(node) {
   return {
@@ -43,7 +46,9 @@ $: c = cls('tab', {
 });
 </script>
 
-<button bind:clientWidth={width} bind:this={tab}
+<svelte:window on:resize={setWidth}></svelte:window>
+
+<button bind:this={tab}
   use:sync={{ id, width }}
   on:click={handleClick}
   {id} class={c} role="tab"
