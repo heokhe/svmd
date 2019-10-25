@@ -10,7 +10,7 @@ export let dismissible = false,
 const onUpdate = () => {
   if (open) openTheDrawer();
   return {
-    update: ({ open: isOpen }) => console.log({ open, isOpen, active }) || (!active ? openTheDrawer : closeTheDrawer)()
+    update: () => (active ? closeTheDrawer : openTheDrawer)()
   }
 }
 
@@ -37,6 +37,7 @@ async function openTheDrawer() {
   await nextFrame();
   animate = false;
   await transitionEnd();
+  await nextFrame();
   opening = false;
 }
 async function closeTheDrawer() {
