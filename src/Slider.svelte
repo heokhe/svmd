@@ -38,7 +38,7 @@
     if (!focus) focus = true;
     const { key } = event,
       st = step || 1,
-      diff = key === 'ArrowLeft' ? -st :
+      delta = key === 'ArrowLeft' ? -st :
         key === 'ArrowRight' ? st :
         key === 'ArrowUp' ? st :
         key === 'ArrowDown' ? -st :
@@ -46,9 +46,9 @@
         key === 'PageDown' ? st * -4 :
         key === 'Home' ? -value :
         key === 'End' ? max - value : undefined;
-    if (diff !== undefined) {
+    if (delta !== undefined) {
       event.preventDefault();
-      value = clamp(value + diff, { min, max, step })
+      value = clamp(value + delta, { min, max, step })
     }
   }
   const handleMouseMove = evt => !evt.touches && active && setValueFromMouseEvent(evt);
